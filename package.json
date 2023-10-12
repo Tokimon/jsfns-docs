@@ -2,10 +2,27 @@
   "name": "@jsfns/docs",
   "version": "1.0.0",
   "description": "Documentation builder for @jsfns packages",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "private": true,
   "author": "Toke Voltelen",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "esrun --tsconfig=./tsconfig.docs.json ./scripts/build.ts",
+    "build:readme": "esrun --tsconfig=./tsconfig.docs.json ./scripts/buildReadme.ts",
+    "prettier": "prettier --write .",
+    "lint": "eslint . --max-warnings=0"
+  },
+  "devDependencies": {
+    "@digitak/esrun": "^3.2.24",
+    "@jsfns/web": "workspace:*",
+    "@types/ejs": "^3.1.2",
+    "@types/marked": "^5.0.0",
+    "ejs": "^3.1.9",
+    "esbuild": "^0.18.10",
+    "highlight.js": "^11.8.0",
+    "marked": "^5.1.0",
+    "marked-highlight": "^2.0.1",
+    "typedoc": "^0.24.8",
+    "typescript": "^5.1.3"
+  }
 }
