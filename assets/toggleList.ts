@@ -1,6 +1,6 @@
-import { findOneByQuery } from '@jsfns/web/findByQuery';
-import { on } from '@jsfns/web/on';
-import { toggleClass } from '@jsfns/web/toggleClass';
+import { findOneByQuery } from '@jsfns/web-latest/findByQuery';
+import { on } from '@jsfns/web-latest/on';
+import { toggleClass } from '@jsfns/web-latest/toggleClass';
 
 export function toggleList(listSelector: string, triggerSelector: string) {
   const List = findOneByQuery(listSelector);

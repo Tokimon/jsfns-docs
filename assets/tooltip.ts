@@ -1,15 +1,15 @@
-import { addClass } from '@jsfns/web/addClass';
-import { attr } from '@jsfns/web/attr';
-import { css } from '@jsfns/web/css';
-import { findById } from '@jsfns/web/findById';
-import { findByQuery } from '@jsfns/web/findByQuery';
-import { hasClass } from '@jsfns/web/hasClass';
-import { innerSize } from '@jsfns/web/innerSize';
-import { on } from '@jsfns/web/on';
-import { outerSize } from '@jsfns/web/outerSize';
-import { position } from '@jsfns/web/position';
-import { removeClass } from '@jsfns/web/removeClass';
-import viewport from '@jsfns/web/viewport';
+import { addClass } from '@jsfns/web-latest/addClass';
+import { attr } from '@jsfns/web-latest/attr';
+import { css } from '@jsfns/web-latest/css';
+import { findById } from '@jsfns/web-latest/findById';
+import { findByQuery } from '@jsfns/web-latest/findByQuery';
+import { hasClass } from '@jsfns/web-latest/hasClass';
+import { innerSize } from '@jsfns/web-latest/innerSize';
+import { on } from '@jsfns/web-latest/on';
+import { outerSize } from '@jsfns/web-latest/outerSize';
+import { position } from '@jsfns/web-latest/position';
+import { removeClass } from '@jsfns/web-latest/removeClass';
+import viewport from '@jsfns/web-latest/viewport';
 
 function positionTooltip(elm: HTMLElement, tooltip: HTMLElement) {
   const vp = viewport();
@@ -57,7 +57,7 @@ export function initTooltips() {
         positionTooltip(elm, tooltip);
       }
     },
-    { delegate: '[data-custom-type]', capture: true }
+    { delegate: '[data-custom-type]', capture: true },
   );
 
   on(
@@ -70,6 +70,6 @@ export function initTooltips() {
 
       if (tooltip) removeClass(tooltip, 'show');
     },
-    { delegate: '[data-custom-type]', capture: true }
+    { delegate: '[data-custom-type]', capture: true },
   );
 }

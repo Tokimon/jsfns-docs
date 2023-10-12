@@ -9,8 +9,6 @@ type RenderIndexProps = {
 };
 
 export const renderIndex = async ({ path, template, data }: RenderIndexProps) => {
-  const html = await ejs.renderFile(resolve('templates', template + '.ejs'), data, {
-    async: true,
-  });
+  const html = await ejs.renderFile(resolve('templates', template + '.ejs'), data, { async: true });
   await writeIndex(path, html);
 };

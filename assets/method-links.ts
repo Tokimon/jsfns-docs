@@ -1,5 +1,5 @@
-import findById from '@jsfns/web/findById';
-import { findByQuery } from '@jsfns/web/findByQuery';
+import findById from '@jsfns/web-latest/findById';
+import { findByQuery } from '@jsfns/web-latest/findByQuery';
 
 export function initMethodLinks() {
   findByQuery('p code').forEach((elm) => {

@@ -1,10 +1,10 @@
-import fuzzySearch from '@jsfns/core/fuzzySearch';
-import { addClass } from '@jsfns/web/addClass';
-import { css } from '@jsfns/web/css';
-import { findById } from '@jsfns/web/findById';
-import { findByQuery, findOneByQuery } from '@jsfns/web/findByQuery';
-import { on } from '@jsfns/web/on';
-import { removeClass } from '@jsfns/web/removeClass';
+import fuzzySearch from '@jsfns/core-latest/fuzzySearch';
+import { addClass } from '@jsfns/web-latest/addClass';
+import { css } from '@jsfns/web-latest/css';
+import { findById } from '@jsfns/web-latest/findById';
+import { findByQuery, findOneByQuery } from '@jsfns/web-latest/findByQuery';
+import { on } from '@jsfns/web-latest/on';
+import { removeClass } from '@jsfns/web-latest/removeClass';
 import { toggleList } from './toggleList';
 
 function onHashChange() {

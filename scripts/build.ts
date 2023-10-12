@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { mkdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { dirname, join } from 'path';
 import { buildJS } from './building/buildJS';
 import { buildTypedoc } from './building/buildTypedoc';
@@ -11,36 +12,41 @@ import { prepareModules } from './type-parsing/prepareModules';
 import { type Kind_Project } from './types';
 import * as color from './utils/color';
 
-async function build() {
-  console.log(color.yellow('\n\n-------------------------------------'));
+const lineFromText = (text: string, subtraction = 0) =>
+  Array(text.length - subtraction)
+    .fill('-')
+    .join('');
 
-  const packageName = process.argv.pop();
-  if (!packageName) throw new Error('package name was not given');
+function boxLog(text: string, colors = 0) {
+  text = `  ${text}  `;
+  const line = color.yellow(lineFromText(text, colors * 9));
+  console.log(`\n${line}\n${text}\n${line}\n`);
+}
 
-  console.log(`  Building ${color.yellow('Docs')} for package: ${color.blue(packageName)}`);
-  console.log(color.yellow('-------------------------------------\n'));
+const checkLog = (text: string) => console.log(`${color.green('🗸')} ${text}`);
 
-  const root = dirname(process.cwd());
-
-  const packagePath = join(root, 'packages', packageName);
-  const docsPath = join(root, 'docs');
+async function build(packageName: string) {
+  const packagePath = dirname(require.resolve('@jsfns/' + packageName));
+  const docsPath = resolve('./docs');
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const pkgJson = require(join(packagePath, 'package.json')) as { name: string; version: string };
+  const { version } = require(join(packagePath, 'package.json')) as { name: string; version: string };
+
+  boxLog(`Building ${color.yellow('Docs')} for package: ${color.blue(packageName)} ${color.gray('@' + version)}`, 3);
+
   const highlightCss = await getHighlighCss();
 
-  const docs = buildTypedoc(packagePath) as unknown as Kind_Project;
+  const docs = (await buildTypedoc(packagePath)) as unknown as Kind_Project;
 
   const modules = prepareModules(docs.children);
-  const { version } = pkgJson;
   const majorVersion = version.replace(/\d+$/, 'x');
   const versionPath = join(docsPath, packageName, majorVersion);
 
-  console.log(`${color.green('🗸')} types parsed`);
+  checkLog('types parsed');
 
   const js = await buildJS();
 
-  console.log(`${color.green('🗸')} JS build`);
+  checkLog('JS build');
 
   await mkdir(versionPath, { recursive: true });
 
@@ -62,9 +68,7 @@ async function build() {
     },
   });
 
-  console.log(
-    `${color.green('🗸')} ${color.blue(packageName + '/' + majorVersion + '/')}${color.yellow('index.html')} successfully generated`
-  );
+  checkLog(`${color.blue(packageName + '/' + majorVersion + '/')}${color.yellow('index.html')} successfully generated`);
 
   const indexes = [
     {
@@ -86,13 +90,11 @@ async function build() {
 
   await Promise.all(indexes.map(renderIndex));
 
-  console.log(
-    `${color.green('🗸')} ${color.blue(packageName + '/')} and ${color.blue('./')} ${color.yellow('index.html')} successfully generated`
-  );
+  checkLog(`${color.blue(packageName + '/')} and ${color.blue('./')} ${color.yellow('index.html')} successfully generated`);
+
+  boxLog(`${color.blue(packageName)} ${color.yellow('Docs')} generation complete`, 2);
 }
 
-build().then(() => {
-  console.log(color.yellow('\n-------------------------------------'));
-  console.log(color.green('  Documentation generation complete'));
-  console.log(color.yellow('-------------------------------------\n\n'));
-}, console.error);
+build('core')
+  .then(() => build('web'))
+  .catch(console.error);
