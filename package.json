@@ -1,0 +1,11 @@
+{
+  "name": "@jsfns/docs",
+  "version": "1.0.0",
+  "description": "Documentation builder for @jsfns packages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Toke Voltelen",
+  "license": "MIT"
+}
