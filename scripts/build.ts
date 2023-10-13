@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { mkdir } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { dirname, join } from 'path';
 import { buildJS } from './building/buildJS';
@@ -44,14 +45,16 @@ async function build(packageName: string) {
 
   checkLog('types parsed');
 
+  const allVersions = await getPackageVersions(docsPath);
+  await writeFile(join(docsPath, 'versions.json'), JSON.stringify(allVersions));
+
+  checkLog('Versions build');
+
   const js = await buildJS();
 
   checkLog('JS build');
 
   await mkdir(versionPath, { recursive: true });
-
-  const allVersions = await getPackageVersions(docsPath);
-  const packageVersions = allVersions[packageName];
 
   await renderIndex({
     template: 'version',
@@ -61,7 +64,6 @@ async function build(packageName: string) {
       packageName,
       displayVersion: version,
       currentVersion: majorVersion,
-      versions: packageVersions,
       customTypes: getCustomTypesArray(),
       highlightCss,
       js,
@@ -74,16 +76,13 @@ async function build(packageName: string) {
     {
       template: 'package',
       path: join(docsPath, packageName),
-      data: { packageName, version: packageVersions[0] },
+      data: { packageName, version: allVersions[packageName][0] },
     },
     {
       template: 'landing',
       path: docsPath,
       data: {
-        packages: Object.entries(allVersions).map(([name, versions]) => ({
-          name,
-          version: versions[0],
-        })),
+        packages: Object.entries(allVersions).map(([name, [version]]) => ({ name, version })),
       },
     },
   ];

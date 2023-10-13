@@ -9,14 +9,14 @@ devDependencies:
     specifier: ^3.2.25
     version: 3.2.25
   '@jsfns/core':
-    specifier: 1.0.0
-    version: 1.0.0
+    specifier: latest
+    version: 1.1.0
   '@jsfns/core-latest':
     specifier: npm:@jsfns/core@latest
     version: /@jsfns/core@1.1.0
   '@jsfns/web':
-    specifier: 1.0.0
-    version: 1.0.0
+    specifier: latest
+    version: 1.1.0
   '@jsfns/web-latest':
     specifier: npm:@jsfns/web@latest
     version: /@jsfns/web@1.1.0
@@ -676,18 +676,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@jsfns/core@1.0.0:
-    resolution: {integrity: sha512-KTIND7EwmS7fvQ26ImC4iLGgNKNop33g4hLvSBudkaoxsDXmzMG2Ue7XZHRpLkM+A3ISn5atDExbDiBSptX2Aw==}
-    dev: true
-
   /@jsfns/core@1.1.0:
     resolution: {integrity: sha512-YmzmKUF1jrhLHeHnNk/igDbCG0jNzNTiwsnJ2j48AQXOcVI8b5eLEa+M6EDRLoT4V8dOW42TcgCC0jWhXE4yYg==}
-    dev: true
-
-  /@jsfns/web@1.0.0:
-    resolution: {integrity: sha512-s0GlnWGWZqyEt+Q/hgZuHH7mbDAxe39wnIuFlLvupb2NXhW/H/L4jqYxFCKTsQSH7w5lg/o5uBaikgztRvPuPw==}
-    dependencies:
-      '@jsfns/core': 1.0.0
     dev: true
 
   /@jsfns/web@1.1.0:

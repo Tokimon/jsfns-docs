@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -21,22 +21,8 @@
           <a href="../../web" class="<%= packageName === 'web' ? 'selected' : '' %>">web</a>
         </h2>
 
-        <div class="page-version">
+        <div class="page-version" data-name="<%= packageName %>" data-current-version="<%= currentVersion %>">
           <div class="version current-version">v. <%= displayVersion %></div>
-
-          <% if (versions.length) { %>
-          <ul class="version-list">
-            <% versions.forEach((version) => { %>
-            <li>
-              <% if (version === currentVersion) { %>
-              <div class="version selected">v. <%= version %></div>
-              <% } else { %>
-              <a href="../<%= version %>" class="version">v. <%= version %></a>
-              <% } %>
-            </li>
-            <% }); %>
-          </ul>
-          <% } %>
         </div>
 
         <a target="_blank" href="https://www.npmjs.com/package/@jsfns/<%= packageName %>" class="repository">
