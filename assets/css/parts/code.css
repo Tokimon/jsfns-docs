@@ -1,0 +1,51 @@
+details[open] summary {
+  margin-bottom: 5px;
+}
+
+details pre code.hljs {
+  background-color: #1c2431;
+  box-shadow: inset #141a24 0 0 5px;
+}
+
+summary {
+  font-size: 12px;
+  cursor: pointer;
+  color: gray;
+  transition: color 0.2s;
+
+  &:hover,
+  &:focus {
+    color: #cc7000;
+    outline: none;
+  }
+}
+
+pre code.hljs {
+  padding: 15px;
+}
+
+code:not(.hljs) {
+  color: hotpink;
+}
+
+code a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.hljs-attr[title] {
+  cursor: help;
+}
+
+.hljs-title.function_ {
+  cursor: pointer;
+}
+
+[data-custom-type] {
+  cursor: pointer;
+}

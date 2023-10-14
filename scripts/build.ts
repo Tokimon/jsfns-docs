@@ -3,6 +3,7 @@ import { mkdir } from 'node:fs/promises';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { dirname, join } from 'path';
+import { buildCSS } from './building/buildCSS';
 import { buildJS } from './building/buildJS';
 import { buildTypedoc } from './building/buildTypedoc';
 import { getHighlighCss } from './building/getHighlighCss';
@@ -35,7 +36,7 @@ async function build(packageName: string) {
 
   boxLog(`Building ${color.yellow('Docs')} for package: ${color.blue(packageName)} ${color.gray('@' + version)}`, 3);
 
-  const highlightCss = await getHighlighCss();
+  // const highlightCss = await getHighlighCss();
 
   const docs = (await buildTypedoc(packagePath)) as unknown as Kind_Project;
 
@@ -54,6 +55,10 @@ async function build(packageName: string) {
 
   checkLog('JS build');
 
+  const [landingCSS, packageCSS, versionCSS] = await Promise.all([buildCSS('landing'), buildCSS('package'), buildCSS('version')]);
+
+  checkLog('CSS build');
+
   await mkdir(versionPath, { recursive: true });
 
   await renderIndex({
@@ -65,7 +70,7 @@ async function build(packageName: string) {
       displayVersion: version,
       currentVersion: majorVersion,
       customTypes: getCustomTypesArray(),
-      highlightCss,
+      css: versionCSS,
       js,
     },
   });
@@ -76,13 +81,18 @@ async function build(packageName: string) {
     {
       template: 'package',
       path: join(docsPath, packageName),
-      data: { packageName, version: allVersions[packageName][0] },
+      data: {
+        packageName,
+        version: allVersions[packageName][0],
+        css: packageCSS,
+      },
     },
     {
       template: 'landing',
       path: docsPath,
       data: {
         packages: Object.entries(allVersions).map(([name, [version]]) => ({ name, version })),
+        css: landingCSS,
       },
     },
   ];

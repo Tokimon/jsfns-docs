@@ -3,7 +3,7 @@ import path from 'path';
 
 export async function buildJS() {
   const options: BuildOptions = {
-    entryPoints: [path.resolve(`assets/index.ts`)],
+    entryPoints: [path.resolve(`assets/js/index.ts`)],
     bundle: true,
     minify: true,
     sourcemap: false,

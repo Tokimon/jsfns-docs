@@ -1,0 +1,45 @@
+.signatures {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: #aaa;
+}
+
+.signature-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
+
+.signature-definition {
+  font-size: 14px;
+}
+
+.signature-description {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.signature-remark {
+  padding: 10px;
+  border: #81644b solid;
+  border-width: 1px 0;
+  color: #808080;
+  width: fit-content;
+
+  & legend {
+    text-transform: uppercase;
+    color: #ffa657;
+    font-size: 11px;
+    padding: 0 7px;
+  }
+}
+
+@container (min-width: 750px) {
+  .signature-definition {
+    font-size: 20px;
+  }
+}

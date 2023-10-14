@@ -41,7 +41,12 @@ export function initTooltips() {
   findByQuery('.module .hljs-title.class_').forEach((element) => {
     if (!element) return;
     if (hasClass(element.previousElementSibling, 'hljs-keyword')) return;
-    attr(element, 'data-custom-type', element.innerHTML.trim());
+
+    const type = element.innerHTML.trim();
+
+    if (!findById('Tooltip-' + type)) return;
+
+    attr(element, 'data-custom-type', type);
   });
 
   on(
@@ -71,5 +76,25 @@ export function initTooltips() {
       if (tooltip) removeClass(tooltip, 'show');
     },
     { delegate: '[data-custom-type]', capture: true },
+  );
+
+  on(
+    'click',
+    (e) => {
+      const elm = e.currentTarget as HTMLElement;
+      const types = elm?.closest('.signature')?.getElementsByClassName('types')[0];
+      if (types) (types as HTMLDetailsElement).open = true;
+    },
+    { delegate: '[data-custom-type]', capture: true },
+  );
+
+  on(
+    'click',
+    (e) => {
+      const elm = e.currentTarget as HTMLElement;
+      const examples = elm?.closest('.signature')?.getElementsByClassName('examples')[0];
+      if (examples) (examples as HTMLDetailsElement).open = true;
+    },
+    { delegate: '.hljs-title.function_', capture: true },
   );
 }

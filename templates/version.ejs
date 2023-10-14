@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@jsfns/<%= packageName %> v. <%= displayVersion %></title>
-    <%- await include('assets/base-css'); %> <%- await include('assets/modules-css'); %>
     <style>
-      <%- highlightCss %>
+      <%- css %>
     </style>
   </head>
 
@@ -70,12 +69,12 @@
                   <% }) %> <% if (func.descriptions) { %>
                   <div class="signature-params"><%- func.descriptions %></div>
                   <% } %> <% if (func.examples.length) { %>
-                  <details>
+                  <details class="examples">
                     <summary>Examples</summary>
                     <% func.examples.forEach((example) => { %> <%- example %> <% }) %>
                   </details>
                   <% } %> <% if (func.typesMarkdown) { %>
-                  <details>
+                  <details class="types">
                     <summary>Types</summary>
                     <%- func.typesMarkdown -%>
                   </details>
