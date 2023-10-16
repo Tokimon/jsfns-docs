@@ -1,0 +1,38 @@
+name: New JSFNS version responder
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: new-version
+
+jobs:
+  new-jsfns-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Install and Build
+        run: |
+          pnpm i
+          pnpm build
+
+      - name: Check for changes
+        id: git-status
+        run: git diff --exit-code
+        continue-on-error: true
+
+      - name: Commit changes
+        if: steps.git-status.outputs.return-code == '0'
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git commit -am "Updated $(git ls-files --modified | grep -Po '(core|web)/\d+\.\d+\.x' | paste -sd '|' | sed 's/|/, /')"
+          git push
