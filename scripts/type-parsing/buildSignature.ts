@@ -9,8 +9,7 @@ export const buildSignature = (typeString: TypeStringFunction, name: string, sig
   const params = parameters?.map((param) => buildParam(typeString, param)) || [];
 
   let typeDef = typeParameter
-    ?.filter(({ flags }) => !flags?.isExternal)
-    .map((t) => {
+    ?.map((t) => {
       const ext = t.type ? ` extends ${typeString(t.type)}` : '';
       return `${t.name}${ext}`;
     })

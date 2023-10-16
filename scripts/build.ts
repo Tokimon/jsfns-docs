@@ -36,9 +36,10 @@ async function build(packageName: string) {
 
   boxLog(`Building ${color.yellow('Docs')} for package: ${color.blue(packageName)} ${color.gray('@' + version)}`, 3);
 
-  // const highlightCss = await getHighlighCss();
-
   const docs = (await buildTypedoc(packagePath)) as unknown as Kind_Project;
+
+  // NOTE Re-introduce to debug docs JSON
+  // await writeFile(join(docsPath, packageName + '.json'), JSON.stringify(docs, null, 2));
 
   const modules = prepareModules(docs.children);
   const majorVersion = version.replace(/\d+$/, 'x');

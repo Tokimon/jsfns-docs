@@ -1097,7 +1097,7 @@
                    
                   <details class="types">
                     <summary>Types</summary>
-                    <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PascalCaseSettings</span> = <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">CamelCaseSettings</span>&gt;;
+                    <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PascalCaseSettings</span> = <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">CamelCaseSettings</span>, <span class="hljs-string">&#x27;upper&#x27;</span> | <span class="hljs-string">&#x27;lower&#x27;</span>&gt;;
 </code></pre>                  </details>
                   
                 </div>
@@ -1158,7 +1158,7 @@
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">popAtIndex</span>(<span class="hljs-attr" title="The Array to remove the item from" title="does stuff">list</span>: T[], <span class="hljs-attr" title="At what index to remove from" title="does stuff">index</span>: <span class="hljs-built_in">number</span>): T | <span class="hljs-literal">undefined</span>
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">popAtIndex</span>&lt;T&gt;(<span class="hljs-attr" title="The Array to remove the item from" title="does stuff">list</span>: T[], <span class="hljs-attr" title="At what index to remove from" title="does stuff">index</span>: <span class="hljs-built_in">number</span>): T | <span class="hljs-literal">undefined</span>
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1242,7 +1242,7 @@ action
                     <summary>Types</summary>
                     <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">NodeLikeCallback</span> = <span class="hljs-function">(<span class="hljs-params">err?: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">Error</span> | <span class="hljs-literal">null</span>, <span class="hljs-attr">data</span>?: <span class="hljs-built_in">unknown</span></span>) =&gt;</span> <span class="hljs-built_in">unknown</span>;
 
-<span class="hljs-keyword">type</span> <span class="hljs-title class_">PromisefiedFunction</span> = <span class="hljs-function">(<span class="hljs-params">args: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> <span class="hljs-title class_">Promise</span>;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">PromisefiedFunction</span> = <span class="hljs-function">(<span class="hljs-params">args: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">any</span>&gt;;
 
 <span class="hljs-keyword">type</span> <span class="hljs-title class_">PromisefyCallback</span> = <span class="hljs-function">(<span class="hljs-params">args: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> <span class="hljs-built_in">any</span>;
 </code></pre>                  </details>
@@ -1659,7 +1659,7 @@ newDate.<span class="hljs-title function_">setMonth</span>(<span class="hljs-num
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">uniqueArray</span>(<span class="hljs-attr" title="ArrayLike or Iterable collection to convert" title="does stuff">arr</span>: <span class="hljs-title class_">ArrayLike</span> | <span class="hljs-title class_">Iterable</span>): T[]
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">uniqueArray</span>&lt;T&gt;(<span class="hljs-attr" title="ArrayLike or Iterable collection to convert" title="does stuff">arr</span>: <span class="hljs-title class_">ArrayLike</span> | <span class="hljs-title class_">Iterable</span>): T[]
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1726,7 +1726,7 @@ newDate.<span class="hljs-title function_">setMonth</span>(<span class="hljs-num
     <div class="tooltip" id="Tooltip-KebabCaseSettings"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">KebabCaseSettings</span> = <span class="hljs-title class_">PhrasifySettings</span>;
 </code></pre></div>
     
-    <div class="tooltip" id="Tooltip-PascalCaseSettings"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PascalCaseSettings</span> = <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">CamelCaseSettings</span>&gt;;
+    <div class="tooltip" id="Tooltip-PascalCaseSettings"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PascalCaseSettings</span> = <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">CamelCaseSettings</span>, <span class="hljs-string">&#x27;upper&#x27;</span> | <span class="hljs-string">&#x27;lower&#x27;</span>&gt;;
 </code></pre></div>
     
     <div class="tooltip" id="Tooltip-PhrasifySettings"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PhrasifySettings</span> = {
@@ -1738,7 +1738,7 @@ newDate.<span class="hljs-title function_">setMonth</span>(<span class="hljs-num
     <div class="tooltip" id="Tooltip-NodeLikeCallback"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">NodeLikeCallback</span> = <span class="hljs-function">(<span class="hljs-params">err?: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">Error</span> | <span class="hljs-literal">null</span>, <span class="hljs-attr">data</span>?: <span class="hljs-built_in">unknown</span></span>) =&gt;</span> <span class="hljs-built_in">unknown</span>;
 </code></pre></div>
     
-    <div class="tooltip" id="Tooltip-PromisefiedFunction"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PromisefiedFunction</span> = <span class="hljs-function">(<span class="hljs-params">args: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> <span class="hljs-title class_">Promise</span>;
+    <div class="tooltip" id="Tooltip-PromisefiedFunction"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PromisefiedFunction</span> = <span class="hljs-function">(<span class="hljs-params">args: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">any</span>&gt;;
 </code></pre></div>
     
     <div class="tooltip" id="Tooltip-PromisefyCallback"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PromisefyCallback</span> = <span class="hljs-function">(<span class="hljs-params">args: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> <span class="hljs-built_in">any</span>;
