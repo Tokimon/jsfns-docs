@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@jsfns/web v. 1.1.0</title>
+    <title>@jsfns/web v. 1.1.1</title>
     <style>
       pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
 /*!
@@ -31,7 +31,7 @@
         </h2>
 
         <div class="page-version" data-name="web" data-current-version="1.1.x">
-          <div class="version current-version">v. 1.1.0</div>
+          <div class="version current-version">v. 1.1.1</div>
         </div>
 
         <a target="_blank" href="https://www.npmjs.com/package/@jsfns/web" class="repository">
@@ -1039,7 +1039,7 @@
               </div>
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">find</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-built_in">any</span>, <span class="hljs-attr" title="The selector to use" title="does stuff">selector</span>: <span class="hljs-built_in">string</span>): T | T[] | <span class="hljs-literal">null</span>
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">find</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-title class_">Maybe</span>&lt;<span class="hljs-built_in">any</span>&gt;, <span class="hljs-attr" title="The selector to use" title="does stuff">selector</span>: <span class="hljs-built_in">string</span>): T | T[] | <span class="hljs-literal">null</span>
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1099,7 +1099,7 @@
               </div>
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findByClass</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-built_in">any</span>, <span class="hljs-attr" title="Class name(s) to find elements by" title="does stuff">classNames</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]): T[]
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findByClass</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-title class_">Maybe</span>&lt;<span class="hljs-built_in">any</span>&gt;, <span class="hljs-attr" title="Class name(s) to find elements by" title="does stuff">classNames</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]): T[]
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1224,7 +1224,7 @@
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findByQuery</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-built_in">any</span>, <span class="hljs-attr" title="CSS selector to find elements by" title="does stuff">queries</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]): T[]
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findByQuery</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-title class_">Maybe</span>&lt;<span class="hljs-built_in">any</span>&gt;, <span class="hljs-attr" title="CSS selector to find elements by" title="does stuff">queries</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]): T[]
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1243,7 +1243,7 @@
                    
                   <details class="types">
                     <summary>Types</summary>
-                    <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">OneArgs</span> = [<span class="hljs-attr">elm</span>: <span class="hljs-title class_">Document</span> | <span class="hljs-title class_">HTMLElement</span>, <span class="hljs-attr">query</span>: <span class="hljs-built_in">string</span>];
+                    <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">OneArgs</span> = [<span class="hljs-attr">elm</span>: <span class="hljs-literal">undefined</span>, <span class="hljs-attr">query</span>: <span class="hljs-built_in">string</span>];
 </code></pre>                  </details>
                   
                 </div>
@@ -1269,14 +1269,14 @@
                    
                   <details class="types">
                     <summary>Types</summary>
-                    <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">OneArgs</span> = [<span class="hljs-attr">elm</span>: <span class="hljs-title class_">Document</span> | <span class="hljs-title class_">HTMLElement</span>, <span class="hljs-attr">query</span>: <span class="hljs-built_in">string</span>];
+                    <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">OneArgs</span> = [<span class="hljs-attr">elm</span>: <span class="hljs-literal">undefined</span>, <span class="hljs-attr">query</span>: <span class="hljs-built_in">string</span>];
 </code></pre>                  </details>
                   
                 </div>
               </div>
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findOneByQuery</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-built_in">any</span>, <span class="hljs-attr" title="CSS selector to find elements by" title="does stuff">query</span>: <span class="hljs-built_in">string</span>): T | <span class="hljs-literal">null</span>
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findOneByQuery</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-title class_">Maybe</span>&lt;<span class="hljs-built_in">any</span>&gt;, <span class="hljs-attr" title="CSS selector to find elements by" title="does stuff">query</span>: <span class="hljs-built_in">string</span>): T | <span class="hljs-literal">null</span>
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1297,7 +1297,7 @@
               </div>
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findOneByQuery</span>(<span class="hljs-attr" title="CSS selector to find elements by" title="does stuff">query</span>: <span class="hljs-built_in">string</span>): <span class="hljs-title class_">HTMLElement</span> | <span class="hljs-literal">null</span>
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findOneByQuery</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="CSS selector to find elements by" title="does stuff">query</span>: <span class="hljs-built_in">string</span>): T | <span class="hljs-literal">null</span>
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1351,7 +1351,7 @@
               </div>
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findByTagName</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-built_in">any</span>, <span class="hljs-attr" title="Tag name to find the elements by" title="does stuff">tagNames</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]): T[]
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">findByTagName</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HTMLElement</span>&gt;(<span class="hljs-attr" title="The DOM element to start the search from" title="does stuff">elm</span>: <span class="hljs-title class_">Maybe</span>&lt;<span class="hljs-built_in">any</span>&gt;, <span class="hljs-attr" title="Tag name to find the elements by" title="does stuff">tagNames</span>: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]): T[]
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1419,7 +1419,7 @@
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">getCurrentWindow</span>(<span class="hljs-attr" title="The node to determine the window from" title="does stuff">node</span>: <span class="hljs-built_in">any</span>): <span class="hljs-literal">null</span> | <span class="hljs-title class_">GeneralWindow</span>
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">getCurrentWindow</span>(<span class="hljs-attr" title="The node to determine the window from" title="does stuff">node</span>: <span class="hljs-built_in">any</span>): <span class="hljs-title class_">GeneralWindow</span> | <span class="hljs-literal">null</span>
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1825,7 +1825,7 @@
                   <div class="signature-description"><p>Test if a given DOM element is invisible.</p>
 <p>Itself or a parent is:</p>
 <ul>
-<li>hidden (see <code>hidden</code>)</li>
+<li>hidden</li>
 <li>No width or no height</li>
 <li>opacity: 0</li>
 </ul>
@@ -1837,7 +1837,7 @@
                   <details class="examples">
                     <summary>Examples</summary>
                      <pre><code class="hljs language-ts"><span class="hljs-title function_">invisible</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>) <span class="hljs-comment">// --&gt; false</span>
-<span class="hljs-title function_">visible</span>(<span class="hljs-title class_">MyNormalElement</span>) <span class="hljs-comment">// --&gt; false</span>
+<span class="hljs-title function_">invisible</span>(<span class="hljs-title class_">MyNormalElement</span>) <span class="hljs-comment">// --&gt; false</span>
 <span class="hljs-title function_">invisible</span>(myZeroHeightElement) <span class="hljs-comment">// --&gt; true</span>
 <span class="hljs-title function_">invisible</span>(myZeroWidthElement) <span class="hljs-comment">// --&gt; true</span>
 <span class="hljs-title function_">invisible</span>(myNoDisplayElement) <span class="hljs-comment">// --&gt; true</span>
@@ -2486,7 +2486,7 @@
   <span class="hljs-attr">delegate</span>?: <span class="hljs-built_in">string</span>
   <span class="hljs-comment">// A method that returns true when the event should trigger</span>
   <span class="hljs-comment">// Combined with `once`, it will only remove the handler when `when()` resolves to true)</span>
-  <span class="hljs-attr">when</span>?: <span class="hljs-function">(<span class="hljs-params">event: Event</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>
+  <span class="hljs-attr">when</span>?: <span class="hljs-function">(<span class="hljs-params">event: ActualEvent</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>
 };
 </code></pre>                  </details>
                   
@@ -2542,7 +2542,7 @@
   <span class="hljs-attr">delegate</span>?: <span class="hljs-built_in">string</span>
   <span class="hljs-comment">// A method that returns true when the event should trigger</span>
   <span class="hljs-comment">// Combined with `once`, it will only remove the handler when `when()` resolves to true)</span>
-  <span class="hljs-attr">when</span>?: <span class="hljs-function">(<span class="hljs-params">event: Event</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>
+  <span class="hljs-attr">when</span>?: <span class="hljs-function">(<span class="hljs-params">event: ActualEvent</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>
 };
 </code></pre>                  </details>
                   
@@ -2616,7 +2616,7 @@
                     
                   <details class="types">
                     <summary>Types</summary>
-                    <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">AttributeMapping</span> = {
+                    <pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">AttributeMapping</span> = <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span> | <span class="hljs-string">&#x27;true&#x27;</span>&gt; &amp; {
   <span class="hljs-keyword">class</span>?: <span class="hljs-title class_">Set</span>&lt;<span class="hljs-built_in">string</span>&gt;
 };
 
@@ -3278,7 +3278,7 @@
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">viewport</span>(<span class="hljs-attr" title="does stuff">elm</span>?: <span class="hljs-built_in">any</span>): <span class="hljs-title class_">HTMLElement</span> | <span class="hljs-literal">null</span>
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">viewport</span>(<span class="hljs-attr" title="does stuff">elm</span>?: <span class="hljs-built_in">any</span>): <span class="hljs-title class_">HTMLElement</span>
 </code></pre></div>
 
                 <div class="signature-content">
@@ -3476,7 +3476,7 @@
     <div class="tooltip" id="Tooltip-CSSStyleProperties"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">CSSStyleProperties</span> = <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span> | <span class="hljs-literal">null</span> | <span class="hljs-literal">undefined</span>&gt;;
 </code></pre></div>
     
-    <div class="tooltip" id="Tooltip-OneArgs"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">OneArgs</span> = [<span class="hljs-attr">elm</span>: <span class="hljs-title class_">Document</span> | <span class="hljs-title class_">HTMLElement</span>, <span class="hljs-attr">query</span>: <span class="hljs-built_in">string</span>];
+    <div class="tooltip" id="Tooltip-OneArgs"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">OneArgs</span> = [<span class="hljs-attr">elm</span>: <span class="hljs-literal">undefined</span>, <span class="hljs-attr">query</span>: <span class="hljs-built_in">string</span>];
 </code></pre></div>
     
     <div class="tooltip" id="Tooltip-PositionIndicator"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">PositionIndicator</span> = {
@@ -3498,11 +3498,11 @@
   <span class="hljs-attr">delegate</span>?: <span class="hljs-built_in">string</span>
   <span class="hljs-comment">// A method that returns true when the event should trigger</span>
   <span class="hljs-comment">// Combined with `once`, it will only remove the handler when `when()` resolves to true)</span>
-  <span class="hljs-attr">when</span>?: <span class="hljs-function">(<span class="hljs-params">event: Event</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>
+  <span class="hljs-attr">when</span>?: <span class="hljs-function">(<span class="hljs-params">event: ActualEvent</span>) =&gt;</span> <span class="hljs-built_in">boolean</span>
 };
 </code></pre></div>
     
-    <div class="tooltip" id="Tooltip-AttributeMapping"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">AttributeMapping</span> = {
+    <div class="tooltip" id="Tooltip-AttributeMapping"><pre><code class="hljs language-ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">AttributeMapping</span> = <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span> | <span class="hljs-string">&#x27;true&#x27;</span>&gt; &amp; {
   <span class="hljs-keyword">class</span>?: <span class="hljs-title class_">Set</span>&lt;<span class="hljs-built_in">string</span>&gt;
 };
 </code></pre></div>
@@ -3567,7 +3567,7 @@
     
 
     <script defer>
-      "use strict";(()=>{var a=t=>typeof t=="string";var st=/^[a-z]+/,ft=/[a-z][\w\d-]*/i,$=ft.source,ut=new RegExp(`#${$}`,"i"),ct=new RegExp(`\\.${$}`,"ig"),at=new RegExp(`\\[(${$})(?:=([^\\]]+))?]`,"g"),H=(t,e,r,o)=>{if(e!=null)if(t==="class"){if(!e)return;r.class||(r.class=new Set),e.split(".").forEach(n=>n&&r.class.add(n))}else{if(t==="id"&&(e=e.replaceAll("#",""),!e))return;(o||!r[t]||r[t]===!0)&&(r[t]=e||!0)}},pt=(t,e)=>{let r=(o,n,i)=>(i=(i||"").replace(/^["']|["']$/g,""),H(n,i,e),"");return t.includes("[")?t.replace(at,r):t};function z(t){let e={},o=(t.match(st)||["div"])[0];t=pt(t,e);let n=t.includes("#")&&t.match(ut);n&&H("id",n[0].slice(1),e,!0);let i=t.includes(".")&&t.match(ct);i&&i.forEach(c=>H("class",c.slice(1),e));let s={tagName:o,attributes:{},attributeList:[]};for(let[c,f]of Object.entries(e))f&&(s.attributeList.push(c),s.attributes[c]=f===!0?"":a(f)?f:Array.from(f).join(" "));return s}var lt=["area","base","br","col","embed","hr","img","input","keygen","link","meta","param","source","track","wbr"];function V(t){let{tagName:e,attributes:r,attributeList:o}=z(t),n=o.map(s=>` ${s}${r[s]?`="${r[s]}"`:""}`).join(""),i=lt.includes(e)?" /":`></${e}`;return`<${e}${n}${i}>`}var N=t=>t.includes("<")?t:V(t);function I(t,e){return t?(a(e)?t.insertAdjacentHTML("beforeend",N(e)):t.append(e),t.lastElementChild):null}var mt={numbers:!1};function W(t,e){return t?(e={...mt,...e},t=`${t}`.replace(/([A-Z])([a-z])/g,r=>` ${r}`),e.numbers&&(t=t.replace(/(\d+)/g," $1 ")),t.replace(/[^a-z\d]+/gi," ").trim()):""}var D=(t,e)=>W(t,e).toLowerCase().replace(/\s+/g,"-");var P=(t,e,r,o)=>{e=D(e);let n=r!=null?String(r):"",i=o?"important":void 0;t.style.setProperty(e,n,i),!Number.isNaN(Number(n))&&t.style.getPropertyValue(e)!==n&&P(t,e,n+"px",o)},Q=(t,e,r)=>{let o=!1;a(r)&&r.includes("!important")&&(r=r.split(" ")[0],o=!0),P(t,e,r,o)},dt=(t,e,r)=>{if(r!==void 0)return Q(t,e,r),window.getComputedStyle(t);let o=window.getComputedStyle(t).getPropertyValue(D(e)),n=parseFloat(o);return Number.isNaN(n)?o:n},gt=(t,e)=>(e&&Object.entries(e).forEach(([r,o])=>{o&&Q(t,r,o)}),window.getComputedStyle(t));function g(t,e,r){return a(e)?dt(t,e,r):gt(t,e)}var h=t=>!!t&&typeof t.nodeType<"u";function L(...t){let e=new Set;for(let r of t)if(r)if(h(r))e.add(r);else for(let o=0;o<r.length;o++)e.add(r[o]);return Array.from(e)}function m(...t){if(a(t[0])||Array.isArray(t[0]))return m(document,t[0]);let[e,r]=t;return Array.isArray(r)&&(r=r.join(",")),L(e.querySelectorAll(r))}function p(...t){if(a(t[0]))return p(document,t[0]);let[e,r]=t;return e.querySelector(r)}var q=()=>fetch("../../versions.json").then(t=>t.json());var R=(t,e)=>{let r=t.constructor.name,o=new window[r](t.type,t);return Object.defineProperty(o,"currentTarget",{value:e??t.currentTarget,writable:!1,enumerable:!0,configurable:!0}),Object.defineProperty(o,"target",{value:t.target,writable:!1,enumerable:!0,configurable:!0}),o};function _(t){return h(t)&&t.nodeType===Node.ELEMENT_NODE}var M=t=>t instanceof EventTarget;function b(...t){if(!M(t[0]))return b(document,...t);let[e,r,o,n]=t;return Array.isArray(r)||(r=[r]),r.forEach(i=>e.removeEventListener(i,o,n)),e}function ht(t,e,r){let{when:o,once:n,delegate:i,...s}=r;if(!o&&!i)return[e,r];function c(f){if(o&&o(f)!==!0)return;let w=()=>b(t,f.type,c,r);if(!i)return n&&w(),e.call(this,f);let{target:E}=f;if(!_(E))return;let d=E.closest(i);if(d)return n&&w(),e.call(d,R(f,d))}return[c,s]}function u(...t){if(!M(t[0]))return u(document,...t);let[e,r,o,n]=t;return Array.isArray(r)||(r=[r]),n&&([o,n]=ht(e,o,n)),r.forEach(i=>e.addEventListener(i,o,n)),()=>b(e,r,o,n)}function k(t,e,r){return t?(Array.isArray(e)||(e=[e]),e.forEach(o=>t.classList.toggle(o,r)),t):null}function A(t,e){let r=p(t);if(!r)return;let o=()=>k(r,"open",!1);u("click",()=>k(r,"open"),{delegate:e}),u("click",o,{when:n=>n.target?.matches(`:not(${e}):not(${t} *)`)}),u("keyup",o,{when:n=>n.key==="Escape"})}async function F(){let t=p(".page-version"),e=await q(),{name:r,currentVersion:o}=t.dataset,n=e[r];if(n.length<2)return;g(p(t,".current-version"),"cursor","pointer");let i=n.map(s=>`<li>${o===s?`<div class="version selected">v. ${s}</div>`:`<a href="../${s}" class="version">v. ${s}</a>`}</li>`);I(t,`<ul class="version-list">${i.join("")}</ul>`),A(".page-version .version-list",".page-version .current-version")}function yt(t,e,r){r?.caseSensitive||([t,e]=[t.toLowerCase(),e.toLowerCase()]);let o=t.length,n=e.length;if(o<=n)return t===e;for(let i=0,s=-1;i<n;i++)for(;s<=o;){if(s===o)return!1;if(t[++s]===e[i])break}return!0}var U=yt;function v(t,e){return t?(Array.isArray(e)||(e=[e]),t.classList.add(...e),t):null}function l(t){let e=r=>document.getElementById(r);return Array.isArray(t)?L(...t.map(e)):e(t)}var Z=l;function C(t,e){return t?(Array.isArray(e)||(e=[e]),t.classList.remove(...e),t):null}function G(){let t=location.hash.slice(1),e=p(".menu-list-item.current");if(t){let r=l("Menu-"+t);if(r===e)return;v(r,"current")}C(e,"current")}function xt(){let t=l("Menu-Search");if(!t)return;let e=m("#Menu .menu-list-item");u(t,"input",()=>{let r=t.value;e.forEach(o=>{let n=U(o.id.slice(5),r);g(o,"display",n?null:"none")})})}function wt(){A("#Menu",".menu-trigger"),u(window,"hashchange",G),G()}function J(){wt(),xt()}function K(){m("p code").forEach(t=>{let e=t.innerText;Z(e)&&(t.innerHTML=`<a href="#${e}">${e}</a>`)})}function X(t,e,r){let o=t.getAttribute(e);return r===!1||r===null?t.removeAttribute(e):r!==void 0&&t.setAttribute(e,r===!0?"":String(r)),o}function Y(t,e,r){if(!t)return!1;let o=r?"some":"every";return(Array.isArray(e)?e:[e])[o](i=>t.classList.contains(i))}var y=t=>h(t)&&t.nodeType===Node.DOCUMENT_NODE;var x=t=>t instanceof Window||Object.prototype.toString.call(t).includes("object Window");function tt(t){return t?y(t)?t:x(t)?t.document:t.ownerDocument:null}function T(t){let e=tt(t||document);return e&&(e.scrollingElement||e.documentElement)}var et=T;function rt(t){if(y(t)||x(t)){let e=T(t);if(!e)return{width:0,height:0};t=e}return{width:t.clientWidth,height:t.clientHeight}}function O(t){if(x(t))return{width:t.outerWidth,height:t.outerHeight};if(y(t)){let e=T(t);if(!e)return{width:0,height:0};t=e}return{width:t.offsetWidth,height:t.offsetHeight}}function B(t,e,r=0){return t?B(t.offsetParent,e,r+t[e]):r}var ot=(t,e,r)=>{let o=e??t.offsetTop,n=r??t.offsetLeft;return{top:o,left:n,right:n+t.offsetWidth,bottom:o+t.offsetHeight}};function nt(t){if(!t)return{top:0,left:0,right:0,bottom:0};let e=B(t,"offsetTop"),r=B(t,"offsetLeft");return{...ot(t,e,r),relative:ot(t)}}function Tt(t,e){let r=et();if(!r)return;let o=rt(r),{top:n,bottom:i,left:s}=nt(t),c=O(t).width,f=O(e),w=o.width-30,E=Math.min(f.width,w),d=i+10;i+f.height-r.scrollTop>o.height&&(d=n-f.height-10);let S=Math.max(15,Math.round(s+c/2-E/2)),j=S+f.width+15;j>o.width&&(S-=j-o.width),g(e,{left:S,top:d,maxWidth:w})}function it(){m(".module .hljs-title.class_").forEach(t=>{if(!t||Y(t.previousElementSibling,"hljs-keyword"))return;let e=t.innerHTML.trim();l("Tooltip-"+e)&&X(t,"data-custom-type",e)}),u("mouseenter",t=>{let e=t.currentTarget;if(!e)return;let r=l("Tooltip-"+e.dataset.customType?.trim());r&&(v(r,"show"),Tt(e,r))},{delegate:"[data-custom-type]",capture:!0}),u("mouseleave",t=>{let e=t.currentTarget;if(!e)return;let r=l("Tooltip-"+e.dataset.customType?.trim());r&&C(r,"show")},{delegate:"[data-custom-type]",capture:!0}),u("click",t=>{let r=t.currentTarget?.closest(".signature")?.getElementsByClassName("types")[0];r&&(r.open=!0)},{delegate:"[data-custom-type]",capture:!0}),u("click",t=>{let r=t.currentTarget?.closest(".signature")?.getElementsByClassName("examples")[0];r&&(r.open=!0)},{delegate:".hljs-title.function_",capture:!0})}J();it();K();F();})();
+      "use strict";(()=>{var c=t=>typeof t=="string";var ft=/^[a-z]+/,ut=/[a-z][\w\d-]*/i,$=ut.source,ct=new RegExp(`#${$}`,"i"),at=new RegExp(`\\.${$}`,"ig"),pt=new RegExp(`\\[(${$})(?:=([^\\]]+))?]`,"g");function lt(t,e){if(!t)return;let r=e.class??new Set;e.class||(e.class=r),t.split(".").forEach(o=>o&&r.add(o))}function z(t,e,r,o){let n=!r[t]||r[t]===!0;(o||n)&&(r[t]=e||!0)}function mt(t,e,r){t=t.replaceAll("#",""),t&&z("id",t,e,r)}var H=(t,e,r,o)=>{t==="class"?lt(e,r):t==="id"?mt(e,r,o):z(t,e,r,o)};function dt(t,e){let r=(o,n,i)=>(i=(i??"").replace(/^["']|["']$/g,""),H(n,i,e),"");return t.includes("[")?t.replace(pt,r):t}function gt(t,e){let r={tagName:t,attributes:{},attributeList:[]};for(let[o,n]of Object.entries(e))r.attributeList.push(o),r.attributes[o]=n===!0?"":c(n)?n:Array.from(n).join(" ");return r}function V(t){let e={},o=t.match(ft)?.[0]??"div";t=dt(t,e);let n=t.includes("#")&&t.match(ct);n&&H("id",n[0].slice(1),e,!0);let i=t.includes(".")&&t.match(at);return i&&i.forEach(s=>H("class",s.slice(1),e)),gt(o,e)}var ht=["area","base","br","col","embed","hr","img","input","keygen","link","meta","param","source","track","wbr"];function N(t){let{tagName:e,attributes:r,attributeList:o}=V(t),n=o.map(s=>` ${s}${r[s]?`="${r[s]}"`:""}`).join(""),i=ht.includes(e)?" /":`></${e}`;return`<${e}${n}${i}>`}var I=t=>t.includes("<")?t:N(t);function P(t,e){return t?(c(e)?t.insertAdjacentHTML("beforeend",I(e)):t.append(e),t.lastElementChild):null}var yt={numbers:!1};function W(t,e){return t?(e={...yt,...e},t=`${t}`.replace(/([A-Z])([a-z])/g,r=>` ${r}`),e.numbers&&(t=t.replace(/(\d+)/g," $1 ")),t.replace(/[^a-z\d]+/gi," ").trim()):""}var D=(t,e)=>W(t,e).toLowerCase().replace(/\s+/g,"-");var Q=(t,e,r,o)=>{e=D(e);let n=r!=null?String(r):"",i=o?"important":void 0;t.style.setProperty(e,n,i),!Number.isNaN(Number(n))&&t.style.getPropertyValue(e)!==n&&Q(t,e,n+"px",o)},q=(t,e,r)=>{let o=!1;c(r)&&r.includes("!important")&&(r=r.split(" ")[0],o=!0),Q(t,e,r,o)},xt=(t,e,r)=>{if(r!==void 0)return q(t,e,r),window.getComputedStyle(t);let o=window.getComputedStyle(t).getPropertyValue(D(e)),n=parseFloat(o);return Number.isNaN(n)?o:n},Tt=(t,e)=>(e&&Object.entries(e).forEach(([r,o])=>{o&&q(t,r,o)}),window.getComputedStyle(t));function m(t,e,r){return c(e)?xt(t,e,r):Tt(t,e)}var d=t=>!!t&&typeof t.nodeType<"u";function M(...t){let e=new Set;for(let r of t)if(r){d(r)&&(r=[r]);for(let o=0;o<r.length;o++)e.add(r[o])}return Array.from(e)}function l(...t){if(c(t[0])||Array.isArray(t[0]))return l(document,t[0]);let[e,r]=t;return e?(Array.isArray(r)&&(r=r.join(",")),M(e.querySelectorAll(r))):[]}function a(...t){if(c(t[0]))return a(document,t[0]);let[e,r]=t;return e?.querySelector(r)??null}var R=()=>fetch("../../versions.json").then(t=>t.json());var _=(t,e)=>{let r=t.constructor.name,o=new window[r](t.type,t);return Object.defineProperty(o,"currentTarget",{value:e??t.currentTarget,writable:!1,enumerable:!0,configurable:!0}),Object.defineProperty(o,"target",{value:t.target,writable:!1,enumerable:!0,configurable:!0}),o};function F(t){return d(t)&&t.nodeType===Node.ELEMENT_NODE}var b=t=>t instanceof EventTarget;function A(...t){if(!b(t[0]))return A(document,...t);let[e,r,o,n]=t;return Array.isArray(r)||(r=[r]),r.forEach(i=>e.removeEventListener(i,o,n)),e}function wt(t,e){let{target:r}=e;if(F(r))return r.closest(t)}function Et(t,e,r){let{when:o,once:n,delegate:i,...s}=r;if(!o&&!i)return[e,r];function y(u){if(o&&o(u)!==!0)return;let x=(L,w)=>(n&&A(t,u.type,y,r),e.call(L,w));if(!i)return x(this,u);let T=wt(i,u);T&&x(T,_(u,T))}return[y,s]}function f(...t){if(!b(t[0]))return f(document,...t);let[e,r,o,n]=t;return Array.isArray(r)||(r=[r]),n&&([o,n]=Et(e,o,n)),r.forEach(i=>e.addEventListener(i,o,n)),()=>A(e,r,o,n)}function k(t,e,r){return t?(Array.isArray(e)||(e=[e]),e.forEach(o=>t.classList.toggle(o,r)),t):null}function C(t,e){let r=a(t);if(!r)return;let o=()=>k(r,"open",!1);f("click",()=>k(r,"open"),{delegate:e}),f("click",o,{when:n=>n.target?.matches(`:not(${e}):not(${t} *)`)}),f("keyup",o,{when:n=>n.key==="Escape"})}async function U(){let t=a(".page-version"),e=await R(),{name:r,currentVersion:o}=t.dataset,n=e[r];if(n.length<2)return;m(a(t,".current-version"),"cursor","pointer");let i=n.map(s=>`<li>${o===s?`<div class="version selected">v. ${s}</div>`:`<a href="../${s}" class="version">v. ${s}</a>`}</li>`);P(t,`<ul class="version-list">${i.join("")}</ul>`),C(".page-version .version-list",".page-version .current-version")}function Lt(t,e,r){r?.caseSensitive||([t,e]=[t.toLowerCase(),e.toLowerCase()]);let o=t.length,n=e.length;if(o<=n)return t===e;for(let i=0,s=-1;i<n;i++)for(;s<=o;){if(s===o)return!1;if(t[++s]===e[i])break}return!0}var Z=Lt;function S(t,e){return t?(Array.isArray(e)||(e=[e]),t.classList.add(...e),t):null}function p(t){let e=r=>document.getElementById(r);return Array.isArray(t)?M(...t.map(e)):e(t)}var G=p;function v(t,e){return t?(Array.isArray(e)||(e=[e]),t.classList.remove(...e),t):null}function J(){let t=location.hash.slice(1),e=a(".menu-list-item.current");if(t){let r=p("Menu-"+t);if(r===e)return;S(r,"current")}v(e,"current")}function Mt(){let t=p("Menu-Search");if(!t)return;let e=l("#Menu .menu-list-item");f(t,"input",()=>{let r=t.value;e.forEach(o=>{let n=Z(o.id.slice(5),r);m(o,"display",n?null:"none")})})}function bt(){C("#Menu",".menu-trigger"),f(window,"hashchange",J),J()}function K(){bt(),Mt()}function X(){l("p code").forEach(t=>{let e=t.innerText;G(e)&&(t.innerHTML=`<a href="#${e}">${e}</a>`)})}function Y(t,e,r){let o=t.getAttribute(e);return r===!1||r===null?t.removeAttribute(e):r!==void 0&&t.setAttribute(e,r===!0?"":String(r)),o}function tt(t,e,r){if(!t)return!1;let o=r?"some":"every";return(Array.isArray(e)?e:[e])[o](i=>t.classList.contains(i))}var g=t=>d(t)&&t.nodeType===Node.DOCUMENT_NODE;var h=t=>t instanceof Window||Object.prototype.toString.call(t).includes("object Window");function et(t){return t?g(t)?t:h(t)?t.document:t.ownerDocument:null}function E(t){let e=(t&&et(t))??document;return e.scrollingElement??e.documentElement}var rt=E;function ot(t){return(g(t)||h(t))&&(t=E(t)),{width:t.clientWidth,height:t.clientHeight}}function O(t){return h(t)?{width:t.outerWidth,height:t.outerHeight}:(g(t)&&(t=E(t)),{width:t.offsetWidth,height:t.offsetHeight})}function B(t,e,r=0){return t?B(t.offsetParent,e,r+t[e]):r}var nt=(t,e,r)=>{let o=e??t.offsetTop,n=r??t.offsetLeft;return{top:o,left:n,right:n+t.offsetWidth,bottom:o+t.offsetHeight}};function it(t){if(!t)return{top:0,left:0,right:0,bottom:0};let e=B(t,"offsetTop"),r=B(t,"offsetLeft");return{...nt(t,e,r),relative:nt(t)}}function At(t,e){let r=rt();if(!r)return;let o=ot(r),{top:n,bottom:i,left:s}=it(t),y=O(t).width,u=O(e),x=o.width-30,T=Math.min(u.width,x),L=i+10;i+u.height-r.scrollTop>o.height&&(L=n-u.height-10);let w=Math.max(15,Math.round(s+y/2-T/2)),j=w+u.width+15;j>o.width&&(w-=j-o.width),m(e,{left:w,top:L,maxWidth:x})}function st(){l(".module .hljs-title.class_").forEach(t=>{if(!t||tt(t.previousElementSibling,"hljs-keyword"))return;let e=t.innerHTML.trim();p("Tooltip-"+e)&&Y(t,"data-custom-type",e)}),f("mouseenter",t=>{let e=t.currentTarget;if(!e)return;let r=p("Tooltip-"+e.dataset.customType?.trim());r&&(S(r,"show"),At(e,r))},{delegate:"[data-custom-type]",capture:!0}),f("mouseleave",t=>{let e=t.currentTarget;if(!e)return;let r=p("Tooltip-"+e.dataset.customType?.trim());r&&v(r,"show")},{delegate:"[data-custom-type]",capture:!0}),f("click",t=>{let r=t.currentTarget?.closest(".signature")?.getElementsByClassName("types")[0];r&&(r.open=!0)},{delegate:"[data-custom-type]",capture:!0}),f("click",t=>{let r=t.currentTarget?.closest(".signature")?.getElementsByClassName("examples")[0];r&&(r.open=!0)},{delegate:".hljs-title.function_",capture:!0})}K();st();X();U();})();
 
     </script>
   </body>
