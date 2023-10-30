@@ -1,10 +1,10 @@
-import { type Type_TemplateLiteral } from '~docs-builder/types';
+import { type Type_TemplateLiteral } from '~docs/types';
 import type { TypeStringFunction, TypeStringOptions } from './typeString';
 
 const parseEntry = (
   typeString: TypeStringFunction,
   entry: Type_TemplateLiteral['head'] | Type_TemplateLiteral['tail'],
-  options?: TypeStringOptions
+  options?: TypeStringOptions,
 ): string => {
   if (!Array.isArray(entry)) {
     if (typeof entry === 'string') return entry;

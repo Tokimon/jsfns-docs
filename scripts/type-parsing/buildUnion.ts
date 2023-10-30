@@ -1,4 +1,4 @@
-import { type Type_Union } from '~docs-builder/types';
+import { type Type_Union } from '~docs/types';
 import { buildTypeCollection } from './buildTypeCollection';
 import { type TypeStringFunction, type TypeStringOptions } from './typeString';
 

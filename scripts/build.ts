@@ -6,7 +6,6 @@ import { dirname, join } from 'path';
 import { buildCSS } from './building/buildCSS';
 import { buildJS } from './building/buildJS';
 import { buildTypedoc } from './building/buildTypedoc';
-import { getHighlighCss } from './building/getHighlighCss';
 import { getPackageVersions } from './building/getPackageVersions';
 import { renderIndex } from './building/renderHtml';
 import { getCustomTypesArray } from './type-parsing/findCustomTypes';

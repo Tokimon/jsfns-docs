@@ -27,10 +27,16 @@ export type BlogTag = {
   content: Summary[];
 };
 
-export type Summary = {
-  kind: string;
-  text: string;
-};
+export type Summary =
+  | {
+      kind: 'text';
+      text: string;
+    }
+  | {
+      kind: 'inline-tag';
+      tag: string;
+      text: string;
+    };
 
 type Source = {
   fileName: string;

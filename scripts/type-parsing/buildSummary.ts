@@ -2,6 +2,11 @@ import type { Summary } from '../types';
 
 export const buildSummary = (summary: Summary[] = []) =>
   summary
-    .map(({ text }) => text)
+    .map(({ text, ...sum }) => {
+      if (sum.kind !== 'inline-tag') return text;
+      if (sum.tag !== '@link') return text;
+
+      return `[${text}](#${text})`;
+    })
     .join('')
     .trim();
