@@ -3,7 +3,7 @@ name: New JSFNS version responder
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: new-version
+    types: [new-version]
 
 jobs:
   new-jsfns-version:
@@ -12,8 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      
+          token: ${{ secrets.ACCESS_TOKEN }}
+
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
@@ -22,6 +22,7 @@ jobs:
       - name: Install and Build
         run: |
           pnpm i
+          pnpm update
           pnpm build
 
       - name: Check for changes
