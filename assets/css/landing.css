@@ -24,6 +24,7 @@ main {
   font-weight: 600;
   text-decoration: none;
   transition: background-color 0.2s;
+  color: white;
 
   & small {
     color: green;
@@ -39,7 +40,8 @@ main {
 
   &:hover,
   &:focus {
-    background: #58b29a;
+    background: var(--focus-color);
+    color: white;
 
     & small {
       opacity: 1;

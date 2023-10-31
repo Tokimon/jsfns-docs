@@ -2,20 +2,15 @@ details[open] summary {
   margin-bottom: 5px;
 }
 
-details pre code.hljs {
-  background-color: #1c2431;
-  box-shadow: inset #141a24 0 0 5px;
-}
-
 summary {
   font-size: 12px;
   cursor: pointer;
   color: gray;
-  transition: color 0.2s;
+  transition: color 150ms linear;
 
   &:hover,
   &:focus {
-    color: #cc7000;
+    color: var(--foldable-color);
     outline: none;
   }
 }
@@ -25,7 +20,7 @@ pre code.hljs {
 }
 
 code:not(.hljs) {
-  color: hotpink;
+  color: var(--property-color);
 }
 
 code a {
