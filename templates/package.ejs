@@ -1,12 +1,11 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta http-equiv="Refresh" content="0; ./<%= version %>" />
     <style>
       <%- css %>
     </style>
     <script>
-      location.assign(`./${location.pathname.split('/').pop()}/<%= version %>${location.hash}`);
+      location.assign(`./<%= version %>${location.hash}`);
     </script>
   </head>
 
