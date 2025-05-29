@@ -1,5 +1,5 @@
 import ejs from 'ejs';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 import { writeIndex } from './writeIndex';
 
 type RenderIndexProps = {

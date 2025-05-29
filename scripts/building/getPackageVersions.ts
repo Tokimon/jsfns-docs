@@ -1,5 +1,5 @@
 import { readdir } from 'node:fs/promises';
-import path from 'path';
+import path from 'node:path';
 
 async function getFolderNames(path: string) {
   const entries = await readdir(path, { withFileTypes: true });

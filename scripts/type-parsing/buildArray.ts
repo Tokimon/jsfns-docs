@@ -1,8 +1,8 @@
-import { type Type_Array } from '../types';
-import { type TypeStringFunction } from './typeString';
+import type { Type_Array } from "../types";
+import { typeString, type TypeStringOptions } from "./typeString";
 
-export const buildArray = (typeString: TypeStringFunction, type: Type_Array) => {
-  let typeStr = typeString(type.elementType);
-  if (/[|&]/.test(typeStr)) typeStr = `(${typeStr})`;
-  return typeStr + '[]';
+export const buildArray = (type: Type_Array, options: TypeStringOptions) => {
+  let str = typeString(type.elementType, options);
+  if (str.includes("|") || str.includes("&")) str = `(${str})`;
+  return str + "[]";
 };

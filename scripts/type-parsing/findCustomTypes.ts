@@ -1,23 +1,42 @@
-import { ReflectionKind } from 'typedoc';
-import type { Kind_Module, Kind_TypeAlias } from '~docs/types';
-import { buildTypeAlias } from './buildTypeAlias';
-import { TSCodeMarkdown } from './markdown';
+import { ReflectionKind } from "typedoc";
+import type { Kind_Module, Kind_TypeAlias } from "~docs/types";
+import { buildTypeAlias } from "./buildTypeAlias";
+import { TSCodeMarkdown } from "./markdown";
+import type { TypeStringOptions } from "./typeString";
 
-const store: Record<string, { type: string; moduleName: string }> = {};
+const store = new Map<string, { type: string; moduleName: string }>();
 
-export const addCustomType = (type: Kind_TypeAlias, moduleName: string) => {
-  if (!store[type.name]) store[type.name] = { type: buildTypeAlias(type), moduleName };
-};
+function addCustomType(
+  type: Kind_TypeAlias,
+  moduleName: string,
+  options: TypeStringOptions,
+) {
+  if (!store.has(type.name))
+    store.set(type.name, { type: buildTypeAlias(type, options), moduleName });
+}
 
-export const getCustomTypesForModule = (moduleName: string) =>
-  Object.values(store)
-    .filter((entry) => entry.moduleName === moduleName)
-    .map(({ type }) => type)
-    .join('\n\n');
+export function getCustomTypesForModule(moduleName: string) {
+  const moduleTypes: string[] = [];
+
+  for (const entry of store.values()) {
+    if (entry.moduleName === moduleName) moduleTypes.push(entry.type);
+  }
+
+  return moduleTypes.join("\n\n");
+}
 
 export const getCustomTypesArray = () =>
-  Object.entries(store).map(([name, { type, moduleName }]) => ({ name, markdown: TSCodeMarkdown(type), moduleName }));
+  Array.from(store.entries()).map(([name, { type, moduleName }]) => ({
+    name,
+    markdown: TSCodeMarkdown(type),
+    moduleName,
+  }));
 
-export function findCustomTypes(module: Kind_Module) {
-  for (const child of module.children) if (child.kind === ReflectionKind.TypeAlias) addCustomType(child, module.name);
+export function findCustomTypes(
+  module: Kind_Module,
+  options: TypeStringOptions,
+) {
+  for (const child of module.children)
+    if (child.kind === ReflectionKind.TypeAlias)
+      addCustomType(child, module.name, options);
 }

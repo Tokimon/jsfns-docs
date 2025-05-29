@@ -1,4 +1,4 @@
-import { type ReflectionKind } from 'typedoc';
+import type { ReflectionKind } from "typedoc";
 
 type BaseProps = {
   id: number;
@@ -29,11 +29,11 @@ export type BlogTag = {
 
 export type Summary =
   | {
-      kind: 'text';
+      kind: "text";
       text: string;
     }
   | {
-      kind: 'inline-tag';
+      kind: "inline-tag";
       tag: string;
       text: string;
     };
@@ -56,55 +56,63 @@ type Target = {
 };
 
 export type Type_Tuple = {
-  type: 'tuple';
+  type: "tuple";
   elements: (Element_NamedTupleMember | Type_Intrinsic | Type_Reference)[];
 };
 
 export type Type_Literal = {
-  type: 'literal';
+  type: "literal";
   value: string | null;
 };
 
 export type Type_TemplateLiteral = {
-  type: 'templateLiteral';
-  head: string | Type_Intrinsic | (Type_Intrinsic | string)[] | (Type_Intrinsic | string)[][];
-  tail: string | Type_Intrinsic | (Type_Intrinsic | string)[] | (Type_Intrinsic | string)[][];
+  type: "templateLiteral";
+  head:
+    | string
+    | Type_Intrinsic
+    | (Type_Intrinsic | string)[]
+    | (Type_Intrinsic | string)[][];
+  tail:
+    | string
+    | Type_Intrinsic
+    | (Type_Intrinsic | string)[]
+    | (Type_Intrinsic | string)[][];
 };
 
 export type Type_Intrinsic = {
-  type: 'intrinsic';
+  type: "intrinsic";
   name: string;
 };
 
 export type Type_Array = {
-  type: 'array';
+  type: "array";
   elementType: Type_Intrinsic | Type_Reference;
 };
 
 export type Type_Union = {
-  type: 'union';
+  type: "union";
   types: Basic_Types[];
 };
 
 export type Type_Query = {
-  type: 'query';
+  type: "query";
   queryType: Basic_Types;
 };
 
 export type Type_Predicate = {
-  type: 'predicate';
+  type: "predicate";
   name: string;
   asserts: boolean;
   targetType: Type_Intrinsic | Type_Reference;
 };
 
 export type Type_Intersection = {
-  type: 'intersection';
+  type: "intersection";
   types: (Type_Reference | Type_Reflection)[];
 };
 
 export type Type_Reference = {
-  type: 'reference';
+  type: "reference";
   target: number | Target;
   typeArguments?: Basic_Types[];
   name: string;
@@ -112,27 +120,57 @@ export type Type_Reference = {
 };
 
 export type Type_TypeOperator = {
-  type: 'typeOperator';
+  type: "typeOperator";
   operator: string;
-  target?: Basic_Types[];
+  target?: Basic_Types;
 };
 
 export type Type_Reflection = {
-  type: 'reflection';
+  type: "reflection";
   declaration: Kind_Literal;
 };
 
+export type Type_Conditional = {
+  type: "conditional";
+  checkType: Basic_Types | Type_IndexedAccess;
+  extendsType: Type_TypeOperator;
+  trueType: Basic_Types | Type_IndexedAccess;
+  falseType: Basic_Types | Type_IndexedAccess;
+};
+
+export type Type_IndexedAccess = {
+  type: "indexedAccess";
+  indexType: Basic_Types;
+  objectType: Basic_Types;
+};
+
 export type Element_NamedTupleMember = {
-  type: 'namedTupleMember';
+  type: "namedTupleMember";
   name: string;
   isOptional: boolean;
   element: Basic_Types;
   defaultValue?: string;
 };
 
-type Basic_Types = Type_Intrinsic | Type_Reference | Type_Array | Type_Tuple | Type_Union | Type_Literal | Type_TemplateLiteral;
+type Basic_Types =
+  | Type_Intrinsic
+  | Type_Reference
+  | Type_Array
+  | Type_Tuple
+  | Type_Union
+  | Type_Literal
+  | Type_TemplateLiteral;
 
-export type All_Types = Basic_Types | Type_Intersection | Type_Reflection | Element_NamedTupleMember | Type_Predicate | Type_Query;
+export type All_Types =
+  | Basic_Types
+  | Type_Intersection
+  | Type_Reflection
+  | Element_NamedTupleMember
+  | Type_Predicate
+  | Type_Query
+  | Type_Conditional
+  | Type_IndexedAccess
+  | Type_TypeOperator;
 
 export type Kind_Project = BaseProps & {
   kind: ReflectionKind.Project;
@@ -143,13 +181,19 @@ export type Kind_Project = BaseProps & {
 
 export type Kind_Module = BaseProps & {
   kind: ReflectionKind.Module;
-  children: (Kind_TypeAlias | Kind_Function | Kind_Variable)[];
+  children: (Kind_TypeAlias | Kind_Function | Kind_Variable | Kind_Reference)[];
 };
 
 export type Kind_Variable = BaseProps & {
   kind: ReflectionKind.Variable;
-  type: Basic_Types;
+  type: All_Types;
   defaultValue?: string;
+  children: All_Types;
+  childrenIncludingDocuments: undefined;
+  signatures: Kind_Signature[];
+  indexSignatures: Kind_Signature[];
+  inheritedFrom: Type_Reference;
+  implementationOf: Type_Reference;
 };
 
 export type Kind_Function = BaseProps & {
@@ -190,4 +234,12 @@ export type Kind_Literal = BaseProps & {
 export type Kind_TypeAlias = BaseProps & {
   kind: ReflectionKind.TypeAlias;
   type: Type_Intersection;
+  children?: Kind_Property[];
+};
+
+export type Kind_Reference = BaseProps & {
+  kind: ReflectionKind.Reference;
+  type: Type_Reference | undefined;
+  children: Basic_Types[] | undefined;
+  target: number;
 };

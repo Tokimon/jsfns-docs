@@ -1,13 +1,20 @@
-import type { Element_NamedTupleMember } from '../types';
-import { buildPropertyLike } from './buildProperty';
-import type { TypeStringFunction } from './typeString';
+import type { Element_NamedTupleMember } from "../types";
+import { buildPropertyLike } from "./buildProperty";
+import type { TypeStringOptions } from "./typeString";
 
-export function buildNamedTupleMember(typeString: TypeStringFunction, prop: Element_NamedTupleMember) {
+export function buildNamedTupleMember(
+  prop: Element_NamedTupleMember,
+  options: TypeStringOptions,
+) {
   const { name, isOptional, element, defaultValue } = prop;
-  return buildPropertyLike(typeString, {
-    name,
-    flags: { isOptional },
-    type: element,
-    defaultValue,
-  });
+
+  return buildPropertyLike(
+    {
+      name,
+      flags: { isOptional },
+      type: element,
+      defaultValue,
+    },
+    options,
+  );
 }

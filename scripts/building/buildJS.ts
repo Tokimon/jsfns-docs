@@ -1,9 +1,9 @@
 import { type BuildOptions, build } from 'esbuild';
-import path from 'path';
+import path from 'node:path';
 
 export async function buildJS() {
   const options: BuildOptions = {
-    entryPoints: [path.resolve(`assets/js/index.ts`)],
+    entryPoints: [path.resolve('assets/js/index.ts')],
     bundle: true,
     minify: true,
     sourcemap: false,

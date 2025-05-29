@@ -1,6 +1,16 @@
-import { type All_Types } from '../types';
-import { type TypeStringFunction, type TypeStringOptions } from './typeString';
+import type { All_Types } from "../types";
+import { typeString, type TypeStringOptions } from "./typeString";
 
-export const buildTypeCollection = (typeString: TypeStringFunction, types: All_Types[] = [], options?: TypeStringOptions) => {
-  return types.map((type) => typeString(type, options)).filter((val) => !!val);
+export const buildTypeCollection = (
+  types: All_Types[] | undefined,
+  options: TypeStringOptions,
+) => {
+  const vals: string[] = [];
+
+  for (const type of types ?? []) {
+    const str = typeString(type, options);
+    if (str) vals.push(str);
+  }
+
+  return vals;
 };

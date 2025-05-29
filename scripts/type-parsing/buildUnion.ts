@@ -1,6 +1,6 @@
-import { type Type_Union } from '~docs/types';
-import { buildTypeCollection } from './buildTypeCollection';
-import { type TypeStringFunction, type TypeStringOptions } from './typeString';
+import type { Type_Union } from "~docs/types";
+import { buildTypeCollection } from "./buildTypeCollection";
+import type { TypeStringOptions } from "./typeString";
 
-export const buildUnion = (typeString: TypeStringFunction, type: Type_Union, options?: TypeStringOptions) =>
-  buildTypeCollection(typeString, type.types, options).join(' | ');
+export const buildUnion = (type: Type_Union, options: TypeStringOptions) =>
+  buildTypeCollection(type.types, options).join(" | ");

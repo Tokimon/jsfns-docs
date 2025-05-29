@@ -1,19 +1,26 @@
-import { type Type_TemplateLiteral } from '~docs/types';
-import type { TypeStringFunction, TypeStringOptions } from './typeString';
+import type { Type_TemplateLiteral } from "~docs/types";
+import { typeString, type TypeStringOptions } from "./typeString";
 
 const parseEntry = (
-  typeString: TypeStringFunction,
-  entry: Type_TemplateLiteral['head'] | Type_TemplateLiteral['tail'],
-  options?: TypeStringOptions,
+  entry: Type_TemplateLiteral["head"],
+  options: TypeStringOptions,
 ): string => {
-  if (!Array.isArray(entry)) {
-    if (typeof entry === 'string') return entry;
-    return `\${${typeString(entry, options)}}`;
-  }
+  if (Array.isArray(entry))
+    return entry.map((ent) => parseEntry(ent, options)).join("");
 
-  return entry.map((ent) => parseEntry(typeString, ent, options)).join('');
+  if (typeof entry === "string") return entry;
+
+  const str = typeString(entry, options);
+  return `\${${str}}`;
 };
 
-export function buildTemplateLiteral(typeString: TypeStringFunction, type: Type_TemplateLiteral, options?: TypeStringOptions) {
-  return `\`${parseEntry(typeString, type.head, options)}${parseEntry(typeString, type.tail, options)}\``;
+export function buildTemplateLiteral(
+  type: Type_TemplateLiteral,
+  options: TypeStringOptions,
+) {
+  const headEntry = parseEntry(type.head, options);
+  const tailEntry = parseEntry(type.tail, options);
+  const str = `\`${headEntry}${tailEntry}\``;
+
+  return str;
 }

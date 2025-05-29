@@ -1,4 +1,15 @@
-import type { Kind_TypeAlias } from '../types';
-import { createTypeString } from './typeString';
+import type { Kind_TypeAlias } from "../types";
+import { buildObject } from "./buildObject";
+import { typeString, type TypeStringOptions } from "./typeString";
 
-export const buildTypeAlias = (type: Kind_TypeAlias) => `type ${type.name} = ${createTypeString()(type.type)};`;
+export function buildTypeAlias(
+  type: Kind_TypeAlias,
+  options: TypeStringOptions,
+) {
+  let str = "TYPE ALIAS MISSING";
+
+  if (type.type) str = typeString(type.type, options);
+  else if (type.children) str = buildObject(type.children, options);
+
+  return `type ${type.name} = ${str};`;
+}

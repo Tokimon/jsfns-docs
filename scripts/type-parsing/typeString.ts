@@ -1,50 +1,70 @@
-import type { All_Types } from '../types';
-import { buildArray } from './buildArray';
-import { buildIntersection } from './buildIntersection';
-import { buildIntrinsic } from './buildIntrinsic';
-import { buildLiteral } from './buildLiteral';
-import { buildNamedTupleMember } from './buildNamedTupleMember';
-import { buildPredicate } from './buildPredicate';
-import { buildReference } from './buildReference';
-import { buildReflection } from './buildReflection';
-import { buildTemplateLiteral } from './buildTemplateLiteral';
-import { buildTuple } from './buildTuple';
-import { buildUnion } from './buildUnion';
+import { logFullObject } from "~docs/utils/log";
+import type { All_Types } from "../types";
+import { buildArray } from "./buildArray";
+import { buildConditional } from "./buildConditional";
+import { buildIndexedAccess } from "./buildIndexedAccess";
+import { buildIntersection } from "./buildIntersection";
+import { buildIntrinsic } from "./buildIntrinsic";
+import { buildLiteral } from "./buildLiteral";
+import { buildNamedTupleMember } from "./buildNamedTupleMember";
+import { buildPredicate } from "./buildPredicate";
+import { buildReference } from "./buildReference";
+import { buildReflection } from "./buildReflection";
+import { buildTemplateLiteral } from "./buildTemplateLiteral";
+import { buildTuple } from "./buildTuple";
+import { buildTypeOperator } from "./buildTypeOperator";
+import { buildUnion } from "./buildUnion";
 
-export type TypeStringOptions = { nonNull?: boolean; commentExtractor?: string[] };
-export type TypeStringFunction = (type: All_Types, options?: TypeStringOptions) => string;
+export type TypeStringOptions = {
+  nonNull?: boolean;
+  commentExtractor?: string[];
+  hasFailure: boolean;
+};
+export type TypeStringFunction = (
+  type: All_Types,
+  options: TypeStringOptions,
+) => string | "FAILURE";
 
-export const createTypeString = (customTypes?: string[]) => {
-  const typeString: TypeStringFunction = (type, options) => {
+export const typeString: TypeStringFunction = (type, options) => {
+  try {
     switch (type.type) {
-      case 'array':
-        return buildArray(typeString, type);
-      case 'predicate':
+      case "array":
+        return buildArray(type, options);
+      case "predicate":
         return buildPredicate(type);
-      case 'intrinsic':
+      case "intrinsic":
         return buildIntrinsic(type, options);
-      case 'literal':
+      case "literal":
         return buildLiteral(type, options);
-      case 'templateLiteral':
-        return buildTemplateLiteral(typeString, type, options);
-      case 'query':
+      case "templateLiteral":
+        return buildTemplateLiteral(type, options);
+      case "query": {
         return typeString(type.queryType, options);
-      case 'tuple':
-        return buildTuple(typeString, type, options);
-      case 'intersection':
-        return buildIntersection(typeString, type, options);
-      case 'union':
-        return buildUnion(typeString, type, options);
-      case 'namedTupleMember':
-        return buildNamedTupleMember(typeString, type);
-      case 'reflection':
-        return buildReflection(typeString, type, options);
-      case 'reference': {
-        if (type.package !== 'typescript') customTypes?.push(type.name);
-        return buildReference(typeString, type, options);
+      }
+      case "tuple":
+        return buildTuple(type, options);
+      case "intersection":
+        return buildIntersection(type, options);
+      case "union":
+        return buildUnion(type, options);
+      case "namedTupleMember":
+        return buildNamedTupleMember(type, options);
+      case "reflection":
+        return buildReflection(type, options);
+      case "reference":
+        return buildReference(type, options);
+      case "conditional":
+        return buildConditional(type, options);
+      case "typeOperator":
+        return buildTypeOperator(type, options);
+      case "indexedAccess": {
+        return buildIndexedAccess(type, options);
       }
     }
-  };
-
-  return typeString;
+  } catch (err) {
+    options.hasFailure = true;
+    console.log("UNKNOWN TYPE:", type.type);
+    logFullObject(type);
+    return "FAILURE";
+  }
 };
