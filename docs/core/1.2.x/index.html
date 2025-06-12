@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@jsfns/core v. 1.2.0</title>
+    <title>@jsfns/core v. 1.2.1</title>
     <style>
       pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}
 /*!
@@ -31,7 +31,7 @@
         </h2>
 
         <div class="page-version" data-name="core" data-current-version="1.2.x">
-          <div class="version current-version">v. 1.2.0</div>
+          <div class="version current-version">v. 1.2.1</div>
         </div>
 
         <a target="_blank" href="https://www.npmjs.com/package/@jsfns/core" class="repository">
@@ -253,10 +253,20 @@
 </code></pre></div>
 
                 <div class="signature-content">
+                  
+                  <div class="signature-description"><p>Capitalize each word in a phrase</p>
+</div>
                     
                   <div class="signature-params"><p><span class="hljs-doctag">@returns</span> : Capitalized string</p>
 </div>
-                    
+                   
+                  <details class="examples">
+                    <summary>Examples</summary>
+                     <pre><code class="hljs language-ts"><span class="hljs-title function_">capitalize</span>(<span class="hljs-string">&#x27;capitalize this phrase&#x27;</span>); <span class="hljs-comment">// --&gt; Capitalize This Phrase</span>
+<span class="hljs-title function_">capitalize</span>(<span class="hljs-string">&#x27;capitalize-This-phrase&#x27;</span>); <span class="hljs-comment">// --&gt; Capitalize-This-Phrase</span>
+</code></pre> 
+                  </details>
+                   
                 </div>
               </div>
               
@@ -595,14 +605,24 @@
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">isFunction</span>(<span class="hljs-attr">x</span>: <span class="hljs-built_in">unknown</span>): <span class="hljs-title function_">boolean</span> (x is <span class="hljs-literal">undefined</span>)
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">isFunction</span>(<span class="hljs-attr" title="Argument to test">x</span>: <span class="hljs-built_in">unknown</span>): <span class="hljs-title function_">boolean</span> (x is <span class="hljs-literal">undefined</span>)
 </code></pre></div>
 
                 <div class="signature-content">
+                  
+                  <div class="signature-description"><p>Is the given argument a Function</p>
+</div>
                     
                   <div class="signature-params"><p><span class="hljs-doctag">@returns</span> : Whether the argument a Function or not</p>
 </div>
-                    
+                   
+                  <details class="examples">
+                    <summary>Examples</summary>
+                     <pre><code class="hljs language-ts"><span class="hljs-title function_">isFunction</span>(<span class="hljs-function">() =&gt;</span> {}); <span class="hljs-comment">// --&gt; true</span>
+<span class="hljs-title function_">isFunction</span>(<span class="hljs-string">&#x27;string&#x27;</span>); <span class="hljs-comment">// --&gt; false</span>
+</code></pre> 
+                  </details>
+                   
                 </div>
               </div>
               
@@ -763,12 +783,12 @@
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">isString</span>(<span class="hljs-attr">x</span>: <span class="hljs-built_in">unknown</span>): <span class="hljs-title function_">boolean</span> (x is <span class="hljs-built_in">string</span>)
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">isString</span>(<span class="hljs-attr" title="Argument to test">x</span>: <span class="hljs-built_in">unknown</span>): <span class="hljs-title function_">boolean</span> (x is <span class="hljs-built_in">string</span>)
 </code></pre></div>
 
                 <div class="signature-content">
                     
-                  <div class="signature-params"><p><span class="hljs-doctag">@returns</span> : Whether the argument a string or not</p>
+                  <div class="signature-params"><p><span class="hljs-doctag">@returns</span> : Whether the argument is a string or not</p>
 </div>
                     
                 </div>
@@ -787,14 +807,24 @@
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">kebabCase</span>(<span class="hljs-attr" title="String to transform">str</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr" title="Settings to pass to the `phrasify` function">settings</span>?: <span class="hljs-title class_">KebabCaseSettings</span>): <span class="hljs-built_in">string</span>
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">kebabCase</span>(<span class="hljs-attr" title="String to transform">str</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr" title="Settings to pass to the `phrasify` function">settings</span>?: <span class="hljs-title class_">PhrasifySettings</span>): <span class="hljs-built_in">string</span>
 </code></pre></div>
 
                 <div class="signature-content">
+                  
+                  <div class="signature-description"><p>Transform phrase into a dashed phrase<br>(eg. &#39;camelCase&#39; -&gt; &#39;camel-case&#39; or &#39;spaced phrase&#39; -&gt; &#39;spaced-phrase&#39;)</p>
+</div>
                     
                   <div class="signature-params"><p><span class="hljs-doctag">@returns</span> : The string with spaces replaced by a dash (-)</p>
 </div>
-                    
+                   
+                  <details class="examples">
+                    <summary>Examples</summary>
+                     <pre><code class="hljs language-ts"><span class="hljs-title function_">kebabCase</span>(<span class="hljs-string">&#x27;some dashed phrase&#x27;</span>); <span class="hljs-comment">// --&gt; some-dashed-phrase</span>
+<span class="hljs-title function_">kebabCase</span>(<span class="hljs-string">&#x27;dash version1 beta&#x27;</span>, { <span class="hljs-attr">numbers</span>: <span class="hljs-literal">true</span> }); <span class="hljs-comment">// --&gt; dash-version-1-beta</span>
+</code></pre> 
+                  </details>
+                   
                 </div>
               </div>
               
@@ -1065,7 +1095,7 @@
             <div class="signatures">
               
               <div class="signature">
-                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">promisefy</span>(<span class="hljs-attr">fn</span>: <span class="hljs-title class_">PromisefyCallback</span>): <span class="hljs-title class_">PromisefiedFunction</span>
+                <div class="signature-definition"><pre><code class="hljs language-ts"><span class="hljs-title function_">promisefy</span>(<span class="hljs-attr" title="The callback to promisefy">fn</span>: <span class="hljs-title class_">PromisefyCallback</span>): <span class="hljs-title class_">PromisefiedFunction</span>
 </code></pre></div>
 
                 <div class="signature-content">
@@ -1073,7 +1103,7 @@
                   <div class="signature-description"><p>Converts a callback based action into one returning a Promise instead.</p>
 </div>
                     
-                  <div class="signature-params"><p><span class="hljs-doctag">@returns</span> : The formatted string</p>
+                  <div class="signature-params"><p><span class="hljs-doctag">@returns</span> : The promisefied function</p>
 </div>
                    
                   <details class="examples">
@@ -1427,7 +1457,7 @@ newDate.<span class="hljs-title function_">setMonth</span>(<span class="hljs-num
 
                 <div class="signature-content">
                   
-                  <div class="signature-description"><p>Ensure that the given <code>callback</code> fucntion can only be called every <code>ms</code> milliseconds</p>
+                  <div class="signature-description"><p>Ensure that the given <code>callback</code> function can only be called every <code>ms</code> milliseconds</p>
 </div>
                     
                   <div class="signature-params"><p><span class="hljs-doctag">@returns</span> : The throttled function</p>
@@ -1517,6 +1547,8 @@ newDate.<span class="hljs-title function_">setMonth</span>(<span class="hljs-num
     
     <div class="tooltip" id="Tooltip-ChunkStringOptions">[object Promise]</div>
     
+    <div class="tooltip" id="Tooltip-DebounceCallback">[object Promise]</div>
+    
     <div class="tooltip" id="Tooltip-DebouncedFunction">[object Promise]</div>
     
     <div class="tooltip" id="Tooltip-CurrencyFormatter">[object Promise]</div>
@@ -1531,8 +1563,6 @@ newDate.<span class="hljs-title function_">setMonth</span>(<span class="hljs-num
     
     <div class="tooltip" id="Tooltip-PhrasifySettings">[object Promise]</div>
     
-    <div class="tooltip" id="Tooltip-NodeLikeCallback">[object Promise]</div>
-    
     <div class="tooltip" id="Tooltip-PromisefiedFunction">[object Promise]</div>
     
     <div class="tooltip" id="Tooltip-PromisefyCallback">[object Promise]</div>
@@ -1545,7 +1575,7 @@ newDate.<span class="hljs-title function_">setMonth</span>(<span class="hljs-num
     
 
     <script defer>
-      "use strict";(()=>{var f=t=>typeof t=="string";var at=/^[a-z]+/,pt=/[a-z][\w\d-]*/i,N=pt.source,lt=new RegExp(`#${N}`,"i"),mt=new RegExp(`\\.${N}`,"ig"),dt=new RegExp(`\\[(${N})(?:=([^\\]]+))?]`,"g");function gt(t,e){if(!t)return;let r=e.class??new Set;e.class||(e.class=r);for(let o of t.split("."))o&&r.add(o)}function z(t,e,r,o){let n=!r[t]||r[t]===!0;(o||n)&&(r[t]=e||!0)}function ht(t,e,r){let o=t.replaceAll("#","");o&&z("id",o,e,r)}var H=(t,e,r,o)=>{t==="class"?gt(e,r):t==="id"?ht(e,r,o):z(t,e,r,o)};function yt(t,e){let r=(o,n,i)=>{let s=(i??"").replace(/^["']|["']$/g,"");return H(n,s,e),""};return t.includes("[")?t.replace(dt,r):t}function xt(t,e){let r={tagName:t,attributes:{},attributeList:[]};for(let[o,n]of Object.entries(e))r.attributeList.push(o),r.attributes[o]=n===!0?"":f(n)?n:Array.from(n).join(" ");return r}function B(t){let e={},o=t.match(at)?.[0]??"div",n=yt(t,e),i=n.includes("#")&&n.match(lt);i&&H("id",i[0].slice(1),e,!0);let s=n.includes(".")&&n.match(mt);for(let a of s||[])H("class",a.slice(1),e);return xt(o,e)}var Tt=["area","base","br","col","embed","hr","img","input","keygen","link","meta","param","source","track","wbr"];function j(t){let{tagName:e,attributes:r,attributeList:o}=B(t),n=o.map(s=>` ${s}${r[s]?`="${r[s]}"`:""}`).join(""),i=Tt.includes(e)?" /":`></${e}`;return`<${e}${n}${i}>`}var V=t=>t.includes("<")?t:j(t);function W(t,e){return t?(f(e)?t.insertAdjacentHTML("beforeend",V(e)):t.append(e),t.lastElementChild):null}var I=t=>(typeof t=="number"||t instanceof Number)&&Number.isFinite(Number(t));function P(t){let e=f(t)&&t?Number(t):t;return I(e)&&!Number.isNaN(e)}var wt={numbers:!1};function Q(t,e){if(!t)return"";let r={...wt,...e},o=`${t}`.replace(/([A-Z])([a-z])/g,n=>` ${n}`);return r.numbers&&(o=o.replace(/(\d+)/g," $1 ")),o.replace(/[^a-z\d]+/gi," ").trim()}var q=(t,e)=>Q(t,e).toLowerCase().replace(/\s+/g,"-");var F=t=>t.includes("-")?t:q(t),R=(t,e,r,o)=>{let n=F(e),i=r!=null?String(r):"",s=o?"important":void 0;t.style.setProperty(n,i,s),P(i)&&t.style.getPropertyValue(n)!==i&&R(t,n,i+"px",o)},_=(t,e,r)=>{let o=!1,n=r;f(n)&&n.includes("!important")&&(n=n.split(" ")[0],o=!0),R(t,e,n,o)},Lt=(t,e,r)=>{if(r!==void 0)return _(t,e,r),window.getComputedStyle(t);let o=window.getComputedStyle(t).getPropertyValue(F(e)),n=Number.parseFloat(o);return Number.isNaN(n)?o:n},Et=(t,e)=>{if(e)for(let[r,o]of Object.entries(e))o&&_(t,r,o);return window.getComputedStyle(t)};function d(t,e,r){return f(e)?Lt(t,e,r):Et(t,e)}var g=t=>!!t&&typeof t.nodeType<"u";function M(...t){let e=new Set;for(let r of t)if(r){g(r)&&(r=[r]);for(let o=0;o<r.length;o++)e.add(r[o])}return Array.from(e)}function m(...t){if(f(t[0])||Array.isArray(t[0]))return m(document,t[0]);let[e,r]=t;return e?(Array.isArray(r)&&(r=r.join(",")),M(e.querySelectorAll(r))):[]}function p(...t){if(f(t[0]))return p(document,t[0]);let[e,r]=t;return e?.querySelector(r)??null}var U=()=>fetch("../../versions.json").then(t=>t.json());var Z=(t,e)=>{let r=t.constructor.name,o=new window[r](t.type,t);return Object.defineProperty(o,"currentTarget",{value:e??t.currentTarget,writable:!1,enumerable:!0,configurable:!0}),Object.defineProperty(o,"target",{value:t.target,writable:!1,enumerable:!0,configurable:!0}),o};function G(t){return g(t)&&t.nodeType===Node.ELEMENT_NODE}var b=t=>t instanceof EventTarget;function v(...t){if(!b(t[0]))return v(document,...t);let[e,r,o,n]=t;Array.isArray(r)||(r=[r]);for(let i of r)e.removeEventListener(i,o,n);return e}function Mt(t,e){let{target:r}=e;if(G(r))return r.closest(t)}function bt(t,e,r){let{when:o,once:n,delegate:i,...s}=r;if(!o&&!i)return[e,r];function a(u){if(o&&o(u)!==!0)return;let x=(E,w)=>(n&&v(t,u.type,a,r),e.call(E,w));if(!i)return x(this,u);let T=Mt(i,u);T&&x(T,Z(u,T))}return[a,s]}function c(...t){if(!b(t[0]))return c(document,...t);let[e,r,o,n]=t;Array.isArray(r)||(r=[r]),n&&([o,n]=bt(e,o,n));for(let i of r)e.addEventListener(i,o,n);return()=>v(e,r,o,n)}function $(t,e,r){if(!t)return null;let o=Array.isArray(e)?e:[e];for(let n of o)t.classList.toggle(n,r);return t}function A(t,e){let r=p(t);if(!r)return;let o=()=>$(r,"open",!1);c("click",()=>$(r,"open"),{delegate:e}),c("click",o,{when:n=>n.target?.matches(`:not(${e}):not(${t} *)`)}),c("keyup",o,{when:n=>n.key==="Escape"})}async function J(){let t=p(".page-version"),e=await U(),{name:r,currentVersion:o}=t.dataset,n=e[r];if(n.length<2)return;d(p(t,".current-version"),"cursor","pointer");let i=n.map(s=>`<li>${o===s?`<div class="version selected">v. ${s}</div>`:`<a href="../${s}" class="version">v. ${s}</a>`}</li>`);W(t,`<ul class="version-list">${i.join("")}</ul>`),A(".page-version .version-list",".page-version .current-version")}function vt(t,e,r){let o=t,n=e;r?.caseSensitive||([o,n]=[o.toLowerCase(),n.toLowerCase()]);let i=o.length,s=n.length;if(i<=s)return o===n;for(let a=0,u=-1;a<s;a++)for(;u<=i;){if(u===i)return!1;if(o[++u]===n[a])break}return!0}var K=vt;function C(t,e){if(!t)return null;let r=Array.isArray(e)?e:[e];return t.classList.add(...r),t}function l(t){let e=r=>document.getElementById(r);return Array.isArray(t)?M(...t.map(e)):e(t)}var X=l;function S(t,e){if(!t)return null;let r=Array.isArray(e)?e:[e];return t.classList.remove(...r),t}function Y(){let t=location.hash.slice(1),e=p(".menu-list-item.current");if(t){let r=l("Menu-"+t);if(r===e)return;C(r,"current")}S(e,"current")}function At(){let t=l("Menu-Search");if(!t)return;let e=m("#Menu .menu-list-item");c(t,"input",()=>{let r=t.value;e.forEach(o=>{let n=K(o.id.slice(5),r);d(o,"display",n?null:"none")})})}function Ct(){A("#Menu",".menu-trigger"),c(window,"hashchange",Y),Y()}function tt(){Ct(),At()}function et(){m("p code").forEach(t=>{let e=t.innerText;X(e)&&(t.innerHTML=`<a href="#${e}">${e}</a>`)})}function rt(t,e,r){let o=t.getAttribute(e);return r===!1||r===null?t.removeAttribute(e):r!==void 0&&t.setAttribute(e,r===!0?"":String(r)),o}function ot(t,e,r){if(!t)return!1;let o=r?"some":"every";return(Array.isArray(e)?e:[e])[o](i=>t.classList.contains(i))}var h=t=>g(t)&&t.nodeType===Node.DOCUMENT_NODE;var y=t=>t instanceof Window||Object.prototype.toString.call(t).includes("object Window");function nt(t){return t?h(t)?t:y(t)?t.document:t.ownerDocument:null}function L(t){let e=(t&&nt(t))??document;return e.scrollingElement??e.documentElement}var it=L;function st(t){let e=h(t)||y(t)?L(t):t;return{width:e.clientWidth,height:e.clientHeight}}function D(t){let e=t;return y(e)?{width:e.outerWidth,height:e.outerHeight}:(h(e)&&(e=L(e)),{width:e.offsetWidth,height:e.offsetHeight})}function k(t,e,r=0){return t?k(t.offsetParent,e,r+t[e]):r}var ut=(t,e,r)=>{let o=e??t.offsetTop,n=r??t.offsetLeft;return{top:o,left:n,right:n+t.offsetWidth,bottom:o+t.offsetHeight}};function ct(t){if(!t)return{top:0,left:0,right:0,bottom:0};let e=k(t,"offsetTop"),r=k(t,"offsetLeft");return{...ut(t,e,r),relative:ut(t)}}function St(t,e){let r=it();if(!r)return;let o=st(r),{top:n,bottom:i,left:s}=ct(t),a=D(t).width,u=D(e),x=o.width-30,T=Math.min(u.width,x),E=i+10;i+u.height-r.scrollTop>o.height&&(E=n-u.height-10);let w=Math.max(15,Math.round(s+a/2-T/2)),O=w+u.width+15;O>o.width&&(w-=O-o.width),d(e,{left:w,top:E,maxWidth:x})}function ft(){m(".module .hljs-title.class_").forEach(t=>{if(!t||ot(t.previousElementSibling,"hljs-keyword"))return;let e=t.innerHTML.trim();l("Tooltip-"+e)&&rt(t,"data-custom-type",e)}),c("mouseenter",t=>{let e=t.currentTarget;if(!e)return;let r=l("Tooltip-"+e.dataset.customType?.trim());r&&(C(r,"show"),St(e,r))},{delegate:"[data-custom-type]",capture:!0}),c("mouseleave",t=>{let e=t.currentTarget;if(!e)return;let r=l("Tooltip-"+e.dataset.customType?.trim());r&&S(r,"show")},{delegate:"[data-custom-type]",capture:!0}),c("click",t=>{let r=t.currentTarget?.closest(".signature")?.getElementsByClassName("types")[0];r&&(r.open=!0)},{delegate:"[data-custom-type]",capture:!0}),c("click",t=>{let r=t.currentTarget?.closest(".signature")?.getElementsByClassName("examples")[0];r&&(r.open=!0)},{delegate:".hljs-title.function_",capture:!0})}tt();ft();et();J();})();
+      "use strict";(()=>{var f=t=>typeof t=="string";var at=/^[a-z]+/,pt=/[a-z][\w\d-]*/i,N=pt.source,lt=new RegExp(`#${N}`,"i"),mt=new RegExp(`\\.${N}`,"ig"),dt=new RegExp(`\\[(${N})(?:=([^\\]]+))?]`,"g");function gt(t,e){if(!t)return;let r=e.class??new Set;e.class||(e.class=r);for(let o of t.split("."))o&&r.add(o)}function j(t,e,r,o){let n=!r[t]||r[t]===!0;(o||n)&&(r[t]=e||!0)}function ht(t,e,r){let o=t.replaceAll("#","");o&&j("id",o,e,r)}var H=(t,e,r,o)=>{t==="class"?gt(e,r):t==="id"?ht(e,r,o):j(t,e,r,o)};function yt(t,e){let r=(o,n,i)=>{let s=(i??"").replace(/^["']|["']$/g,"");return H(n,s,e),""};return t.includes("[")?t.replace(dt,r):t}function xt(t,e){let r={tagName:t,attributes:{},attributeList:[]};for(let[o,n]of Object.entries(e))r.attributeList.push(o),r.attributes[o]=n===!0?"":f(n)?n:Array.from(n).join(" ");return r}function z(t){let e={},o=t.match(at)?.[0]??"div",n=yt(t,e),i=n.includes("#")&&n.match(lt);i&&H("id",i[0].slice(1),e,!0);let s=n.includes(".")&&n.match(mt);for(let a of s||[])H("class",a.slice(1),e);return xt(o,e)}var Tt=["area","base","br","col","embed","hr","img","input","keygen","link","meta","param","source","track","wbr"];function B(t){let{tagName:e,attributes:r,attributeList:o}=z(t),n=o.map(s=>` ${s}${r[s]?`="${r[s]}"`:""}`).join(""),i=Tt.includes(e)?" /":`></${e}`;return`<${e}${n}${i}>`}function V(t){return t.includes("<")?t:B(t)}function W(t,e){return t?(f(e)?t.insertAdjacentHTML("beforeend",V(e)):t.append(e),t.lastElementChild):null}var I=t=>(typeof t=="number"||t instanceof Number)&&Number.isFinite(Number(t));function P(t){let e=f(t)&&t?Number(t):t;return I(e)&&!Number.isNaN(e)}var wt={numbers:!1};function Q(t,e){if(!t)return"";let r={...wt,...e},o=`${t}`.replace(/([A-Z])([a-z])/g,n=>` ${n}`);return r.numbers&&(o=o.replace(/(\d+)/g," $1 ")),o.replace(/[^a-z\d]+/gi," ").trim()}function q(t,e){return Q(t,e).toLowerCase().replace(/\s+/g,"-")}function F(t){return t.includes("-")?t:q(t)}function R(t,e,r,o){let n=F(e),i=r!=null?String(r):"",s=o?"important":void 0;t.style.setProperty(n,i,s),P(i)&&t.style.getPropertyValue(n)!==i&&R(t,n,i+"px",o)}function _(t,e,r){let o=!1,n=r;f(n)&&n.includes("!important")&&(n=n.split(" ")[0],o=!0),R(t,e,n,o)}function Lt(t,e,r){if(r!==void 0)return _(t,e,r),window.getComputedStyle(t);let o=window.getComputedStyle(t).getPropertyValue(F(e)),n=Number.parseFloat(o);return Number.isNaN(n)?o:n}function Et(t,e){if(e)for(let[r,o]of Object.entries(e))o&&_(t,r,o);return window.getComputedStyle(t)}function d(t,e,r){return f(e)?Lt(t,e,r):Et(t,e)}var g=t=>!!t&&typeof t.nodeType<"u";function M(...t){let e=new Set;for(let r of t)if(r){g(r)&&(r=[r]);for(let o=0;o<r.length;o++)e.add(r[o])}return Array.from(e)}function m(...t){if(f(t[0])||Array.isArray(t[0]))return m(document,t[0]);let[e,r]=t;return e?(Array.isArray(r)&&(r=r.join(",")),M(e.querySelectorAll(r))):[]}function p(...t){if(f(t[0]))return p(document,t[0]);let[e,r]=t;return e?.querySelector(r)??null}var U=()=>fetch("../../versions.json").then(t=>t.json());function Z(t,e){let r=t.constructor.name,o=new window[r](t.type,t);return Object.defineProperty(o,"currentTarget",{value:e??t.currentTarget,writable:!1,enumerable:!0,configurable:!0}),Object.defineProperty(o,"target",{value:t.target,writable:!1,enumerable:!0,configurable:!0}),o}function G(t){return g(t)&&t.nodeType===Node.ELEMENT_NODE}var b=t=>t instanceof EventTarget;function v(...t){if(!b(t[0]))return v(document,...t);let[e,r,o,n]=t;Array.isArray(r)||(r=[r]);for(let i of r)e.removeEventListener(i,o,n);return e}function Mt(t,e){let{target:r}=e;if(G(r))return r.closest(t)}function bt(t,e,r){let{when:o,once:n,delegate:i,...s}=r;if(!o&&!i)return[e,r];function a(u){if(o&&o(u)!==!0)return;let x=(E,w)=>(n&&v(t,u.type,a,r),e.call(E,w));if(!i)return x(this,u);let T=Mt(i,u);T&&x(T,Z(u,T))}return[a,s]}function c(...t){if(!b(t[0]))return c(document,...t);let[e,r,o,n]=t;Array.isArray(r)||(r=[r]),n&&([o,n]=bt(e,o,n));for(let i of r)e.addEventListener(i,o,n);return()=>v(e,r,o,n)}function $(t,e,r){if(!t)return null;let o=Array.isArray(e)?e:[e];for(let n of o)t.classList.toggle(n,r);return t}function A(t,e){let r=p(t);if(!r)return;let o=()=>$(r,"open",!1);c("click",()=>$(r,"open"),{delegate:e}),c("click",o,{when:n=>n.target?.matches(`:not(${e}):not(${t} *)`)}),c("keyup",o,{when:n=>n.key==="Escape"})}async function J(){let t=p(".page-version"),e=await U(),{name:r,currentVersion:o}=t.dataset,n=e[r];if(n.length<2)return;d(p(t,".current-version"),"cursor","pointer");let i=n.map(s=>`<li>${o===s?`<div class="version selected">v. ${s}</div>`:`<a href="../${s}" class="version">v. ${s}</a>`}</li>`);W(t,`<ul class="version-list">${i.join("")}</ul>`),A(".page-version .version-list",".page-version .current-version")}function vt(t,e,r){let o=t,n=e;r?.caseSensitive||([o,n]=[o.toLowerCase(),n.toLowerCase()]);let i=o.length,s=n.length;if(i<=s)return o===n;for(let a=0,u=-1;a<s;a++)for(;u<=i;){if(u===i)return!1;if(o[++u]===n[a])break}return!0}var K=vt;function C(t,e){if(!t)return null;let r=Array.isArray(e)?e:[e];return t.classList.add(...r),t}function l(t){let e=r=>document.getElementById(r);return Array.isArray(t)?M(...t.map(e)):e(t)}var X=l;function S(t,e){if(!t)return null;let r=Array.isArray(e)?e:[e];return t.classList.remove(...r),t}function Y(){let t=location.hash.slice(1),e=p(".menu-list-item.current");if(t){let r=l("Menu-"+t);if(r===e)return;C(r,"current")}S(e,"current")}function At(){let t=l("Menu-Search");if(!t)return;let e=m("#Menu .menu-list-item");c(t,"input",()=>{let r=t.value;e.forEach(o=>{let n=K(o.id.slice(5),r);d(o,"display",n?null:"none")})})}function Ct(){A("#Menu",".menu-trigger"),c(window,"hashchange",Y),Y()}function tt(){Ct(),At()}function et(){m("p code").forEach(t=>{let e=t.innerText;X(e)&&(t.innerHTML=`<a href="#${e}">${e}</a>`)})}function rt(t,e,r){let o=t.getAttribute(e);return r===!1||r===null?t.removeAttribute(e):r!==void 0&&t.setAttribute(e,r===!0?"":String(r)),o}function ot(t,e,r){if(!t)return!1;let o=r?"some":"every";return(Array.isArray(e)?e:[e])[o](i=>t.classList.contains(i))}var h=t=>g(t)&&t.nodeType===Node.DOCUMENT_NODE;var y=t=>t instanceof Window||Object.prototype.toString.call(t).includes("object Window");function nt(t){return t?h(t)?t:y(t)?t.document:t.ownerDocument:null}function L(t){let e=(t&&nt(t))??document;return e.scrollingElement??e.documentElement}var it=L;function st(t){let e=h(t)||y(t)?L(t):t;return{width:e.clientWidth,height:e.clientHeight}}function D(t){let e=t;return y(e)?{width:e.outerWidth,height:e.outerHeight}:(h(e)&&(e=L(e)),{width:e.offsetWidth,height:e.offsetHeight})}function k(t,e,r=0){return t?k(t.offsetParent,e,r+t[e]):r}var ut=(t,e,r)=>{let o=e??t.offsetTop,n=r??t.offsetLeft;return{top:o,left:n,right:n+t.offsetWidth,bottom:o+t.offsetHeight}};function ct(t){if(!t)return{top:0,left:0,right:0,bottom:0};let e=k(t,"offsetTop"),r=k(t,"offsetLeft");return{...ut(t,e,r),relative:ut(t)}}function St(t,e){let r=it();if(!r)return;let o=st(r),{top:n,bottom:i,left:s}=ct(t),a=D(t).width,u=D(e),x=o.width-30,T=Math.min(u.width,x),E=i+10;i+u.height-r.scrollTop>o.height&&(E=n-u.height-10);let w=Math.max(15,Math.round(s+a/2-T/2)),O=w+u.width+15;O>o.width&&(w-=O-o.width),d(e,{left:w,top:E,maxWidth:x})}function ft(){m(".module .hljs-title.class_").forEach(t=>{if(!t||ot(t.previousElementSibling,"hljs-keyword"))return;let e=t.innerHTML.trim();l("Tooltip-"+e)&&rt(t,"data-custom-type",e)}),c("mouseenter",t=>{let e=t.currentTarget;if(!e)return;let r=l("Tooltip-"+e.dataset.customType?.trim());r&&(C(r,"show"),St(e,r))},{delegate:"[data-custom-type]",capture:!0}),c("mouseleave",t=>{let e=t.currentTarget;if(!e)return;let r=l("Tooltip-"+e.dataset.customType?.trim());r&&S(r,"show")},{delegate:"[data-custom-type]",capture:!0}),c("click",t=>{let r=t.currentTarget?.closest(".signature")?.getElementsByClassName("types")[0];r&&(r.open=!0)},{delegate:"[data-custom-type]",capture:!0}),c("click",t=>{let r=t.currentTarget?.closest(".signature")?.getElementsByClassName("examples")[0];r&&(r.open=!0)},{delegate:".hljs-title.function_",capture:!0})}tt();ft();et();J();})();
 
     </script>
   </body>
