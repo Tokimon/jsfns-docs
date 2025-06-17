@@ -1,23 +1,23 @@
 table {
-  table-layout: auto;
-  border-collapse: collapse;
+	table-layout: auto;
+	border-collapse: collapse;
 
-  & th,
-  & td {
-    text-align: left;
-    padding: 5px 10px;
-    border: 0 solid var(--border-color);
-    border-width: 0 0 1px;
+	& th,
+	& td {
+		text-align: left;
+		padding: 5px 10px;
+		border: 0 solid var(--border-color);
+		border-width: 0 0 1px;
 
-    & + & {
-      border-left-width: 1px;
-    }
-  }
+		& + & {
+			border-left-width: 1px;
+		}
+	}
 
-  & tbody tr:last-child {
-    & th,
-    & td {
-      border-bottom: 0;
-    }
-  }
+	& tbody tr:last-child {
+		& th,
+		& td {
+			border-bottom: 0;
+		}
+	}
 }

@@ -1,10 +1,10 @@
 :root {
-  --foldable-color: #cc7000;
-  --property-color: hotpink;
-  --link-color: #79b3ff;
-  --focus-color: #58b29a;
-  --hover-color: darkolivegreen;
-  --border-color: #444;
-  --module-bg-color: #192229;
-  --header-color: #212d36;
+	--foldable-color: #cc7000;
+	--property-color: hotpink;
+	--link-color: #79b3ff;
+	--focus-color: #58b29a;
+	--hover-color: darkolivegreen;
+	--border-color: #444;
+	--module-bg-color: #192229;
+	--header-color: #212d36;
 }

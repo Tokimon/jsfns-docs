@@ -5,27 +5,27 @@ import { loadVersions } from './load-versions';
 import { toggleList } from './toggleList';
 
 export async function initVersions() {
-  const pageVersion = findOneByQuery('.page-version') as HTMLElement;
+	const pageVersion = findOneByQuery('.page-version') as HTMLElement;
 
-  const versions = await loadVersions();
+	const versions = await loadVersions();
 
-  const { name, currentVersion } = pageVersion.dataset;
-  const packageVersions = versions[name as string];
+	const { name, currentVersion } = pageVersion.dataset;
+	const packageVersions = versions[name as string];
 
-  if (packageVersions.length < 2) return;
+	if (packageVersions.length < 2) return;
 
-  css(findOneByQuery(pageVersion, '.current-version') as HTMLElement, 'cursor', 'pointer');
+	css(findOneByQuery(pageVersion, '.current-version') as HTMLElement, 'cursor', 'pointer');
 
-  const items = packageVersions.map((version) => {
-    const content =
-      currentVersion === version
-        ? `<div class="version selected">v. ${version}</div>`
-        : `<a href="../${version}" class="version">v. ${version}</a>`;
+	const items = packageVersions.map((version) => {
+		const content =
+			currentVersion === version
+				? `<div class="version selected">v. ${version}</div>`
+				: `<a href="../${version}" class="version">v. ${version}</a>`;
 
-    return `<li>${content}</li>`;
-  });
+		return `<li>${content}</li>`;
+	});
 
-  append(pageVersion, `<ul class="version-list">${items.join('')}</ul>`);
+	append(pageVersion, `<ul class="version-list">${items.join('')}</ul>`);
 
-  toggleList('.page-version .version-list', '.page-version .current-version');
+	toggleList('.page-version .version-list', '.page-version .current-version');
 }

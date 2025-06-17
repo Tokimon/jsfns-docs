@@ -1,17 +1,17 @@
 .tooltip {
-  display: none;
-  border-radius: 5px;
-  box-shadow: #1a1f23 0 4px 8px -2px;
-  overflow: hidden;
-  border: 1px solid #333;
-  z-index: 99;
-  position: absolute;
+	display: none;
+	border-radius: 5px;
+	box-shadow: #1a1f23 0 4px 8px -2px;
+	overflow: hidden;
+	border: 1px solid #333;
+	z-index: 99;
+	position: absolute;
 
-  &.show {
-    display: block;
-  }
+	&.show {
+		display: block;
+	}
 
-  & code.hljs {
-    background-color: #292d25;
-  }
+	& code.hljs {
+		background-color: #292d25;
+	}
 }

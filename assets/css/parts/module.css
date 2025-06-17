@@ -1,100 +1,101 @@
 .modules {
-  container-type: inline-size;
-  grid-area: content;
-  padding: 0 15px var(--header-hight);
-  overflow: hidden;
-  position: relative;
-  z-index: 9;
-  transition: filter 0.2s;
+	container-type: inline-size;
+	grid-area: content;
+	padding: 0 15px var(--header-hight);
+	overflow: hidden;
+	position: relative;
+	z-index: 9;
+	transition: filter 0.2s;
+}
+
+.module-content {
+	background: var(--module-bg-color);
+	border-radius: 5px;
+	margin-top: 15px;
+	transition: box-shadow 1s;
+
+	& h1 {
+		margin: 0;
+		padding: 0 15px;
+		line-height: 50px;
+		font-size: 18px;
+		font-weight: 400;
+		border-top-left-radius: inherit;
+		border-top-right-radius: inherit;
+
+		b {
+			color: gray;
+			transition: color 0.2s;
+		}
+
+		a {
+			color: currentColor;
+			text-decoration: none;
+
+			&:hover,
+			&:focus {
+				b {
+					color: currentColor;
+				}
+			}
+		}
+	}
+
+	&:hover {
+		box-shadow: 0 0 3px 1px var(--hover-color);
+		transition: box-shadow 0.2s;
+	}
 }
 
 .menu-trigger {
-  width: 22px;
-  height: 16px;
-  border: 0;
-  background: white linear-gradient(transparent, transparent 25%, var(--header-color) 25%, var(--header-color));
-  background-repeat: repeat;
-  background-size: 1px 7px;
-  appearance: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
+	width: 22px;
+	height: 16px;
+	border: 0;
+	background: white
+		linear-gradient(transparent, transparent 25%, var(--header-color) 25%, var(--header-color));
+	background-repeat: repeat;
+	background-size: 1px 7px;
+	appearance: none;
+	cursor: pointer;
+	transition: background-color 0.2s;
 
-  &:hover {
-    background-color: var(--hover-color);
-  }
+	&:hover {
+		background-color: var(--hover-color);
+	}
 
-  &:focus {
-    outline: none;
-    background-color: var(--focus-color);
-  }
+	&:focus {
+		outline: none;
+		background-color: var(--focus-color);
+	}
 
-  @media (min-width: 800px) {
-    display: none;
-  }
+	@media (min-width: 800px) {
+		display: none;
+	}
 }
 
 .menu-trigger,
 .repository {
-  flex: 0 0 auto;
+	flex: 0 0 auto;
 }
 
 .repository img {
-  width: 20px;
-  aspect-ratio: 1;
+	width: 20px;
+	aspect-ratio: 1;
 }
 
 .module {
-  padding-top: var(--header-hight);
+	padding-top: var(--header-hight);
 
-  &:target {
-    .module-content,
-    .module-content:hover {
-      box-shadow: 0 0 3px 1px var(--focus-color);
-    }
-  }
-}
-
-.module-content {
-  background: var(--module-bg-color);
-  border-radius: 5px;
-  margin-top: 15px;
-  transition: box-shadow 1s;
-
-  &:hover {
-    box-shadow: 0 0 3px 1px var(--hover-color);
-    transition: box-shadow 0.2s;
-  }
-
-  & h1 {
-    margin: 0;
-    padding: 0 15px;
-    line-height: 50px;
-    font-size: 18px;
-    font-weight: 400;
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-
-    & a {
-      color: currentColor;
-      text-decoration: none;
-
-      &:hover,
-      &:focus {
-        & b {
-          color: currentColor;
-        }
-      }
-    }
-
-    & b {
-      color: gray;
-      transition: color 0.2s;
-    }
-  }
+	&:target {
+		.module-content,
+		.module-content:hover {
+			box-shadow: 0 0 3px 1px var(--focus-color);
+		}
+	}
 }
 
 @container (min-width: 600px) {
-  .module-content h1 {
-    font-size: 25px;
-  }
+	.module-content h1 {
+		font-size: 25px;
+	}
 }

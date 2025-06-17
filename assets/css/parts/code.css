@@ -1,46 +1,46 @@
-details[open] summary {
-  margin-bottom: 5px;
+summary {
+	font-size: 12px;
+	cursor: pointer;
+	color: gray;
+	transition: color 150ms linear;
+
+	&:hover,
+	&:focus {
+		color: var(--foldable-color);
+		outline: none;
+	}
 }
 
-summary {
-  font-size: 12px;
-  cursor: pointer;
-  color: gray;
-  transition: color 150ms linear;
-
-  &:hover,
-  &:focus {
-    color: var(--foldable-color);
-    outline: none;
-  }
+details[open] summary {
+	margin-bottom: 5px;
 }
 
 pre code.hljs {
-  padding: 15px;
+	padding: 15px;
 }
 
 code:not(.hljs) {
-  color: var(--property-color);
+	color: var(--property-color);
 }
 
 code a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
 }
 
 .hljs-attr[title] {
-  cursor: help;
+	cursor: help;
 }
 
 .hljs-title.function_ {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 [data-custom-type] {
-  cursor: pointer;
+	cursor: pointer;
 }

@@ -8,43 +8,43 @@ import { removeClass } from '@jsfns/web-latest/removeClass';
 import { toggleList } from './toggleList';
 
 function onHashChange() {
-  const moduleName = location.hash.slice(1);
-  const current = findOneByQuery('.menu-list-item.current');
+	const moduleName = location.hash.slice(1);
+	const current = findOneByQuery('.menu-list-item.current');
 
-  if (moduleName) {
-    const menuItem = findById('Menu-' + moduleName);
-    if (menuItem === current) return;
+	if (moduleName) {
+		const menuItem = findById('Menu-' + moduleName);
+		if (menuItem === current) return;
 
-    addClass(menuItem, 'current');
-  }
+		addClass(menuItem, 'current');
+	}
 
-  removeClass(current, 'current');
+	removeClass(current, 'current');
 }
 
 function initSearch() {
-  const SearchField = findById<HTMLInputElement>('Menu-Search');
-  if (!SearchField) return;
+	const SearchField = findById<HTMLInputElement>('Menu-Search');
+	if (!SearchField) return;
 
-  const menuItems = findByQuery('#Menu .menu-list-item');
+	const menuItems = findByQuery('#Menu .menu-list-item');
 
-  on(SearchField, 'input', () => {
-    const searchWord = SearchField.value;
+	on(SearchField, 'input', () => {
+		const searchWord = SearchField.value;
 
-    menuItems.forEach((itm) => {
-      const isMatch = fuzzySearch(itm.id.slice(5), searchWord);
-      css(itm, 'display', !isMatch ? 'none' : null);
-    });
-  });
+		menuItems.forEach((itm) => {
+			const isMatch = fuzzySearch(itm.id.slice(5), searchWord);
+			css(itm, 'display', !isMatch ? 'none' : null);
+		});
+	});
 }
 
 function initCurrentChange() {
-  toggleList('#Menu', '.menu-trigger');
+	toggleList('#Menu', '.menu-trigger');
 
-  on(window, 'hashchange', onHashChange);
-  onHashChange();
+	on(window, 'hashchange', onHashChange);
+	onHashChange();
 }
 
 export function initMenu() {
-  initCurrentChange();
-  initSearch();
+	initCurrentChange();
+	initSearch();
 }
