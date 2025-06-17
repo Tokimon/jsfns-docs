@@ -1,4 +1,4 @@
-import type { Type_Predicate } from "../types";
+import type { Type_Predicate } from '../types.d.ts';
 
 export const buildPredicate = (type: Type_Predicate) =>
-  `boolean (${type.name} is ${type.targetType.name})`;
+	`boolean (${type.name} is ${type.targetType.name})`;

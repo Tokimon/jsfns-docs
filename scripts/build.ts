@@ -1,134 +1,129 @@
-import { mkdir, writeFile } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
-import { buildCSS } from "./building/buildCSS";
-import { buildJS } from "./building/buildJS";
-import { buildTypedoc } from "./building/buildTypedoc";
-import { getPackageVersions } from "./building/getPackageVersions";
-import { renderIndex } from "./building/renderHtml";
-import { getCustomTypesArray } from "./type-parsing/findCustomTypes";
-import { prepareModules } from "./type-parsing/prepareModules";
-import type { TypeStringOptions } from "./type-parsing/typeString";
-import type { Kind_Project } from "./types";
-import * as color from "./utils/color";
+import { mkdir, writeFile } from 'node:fs/promises';
+import { dirname, join, resolve } from 'node:path';
+import { buildCSS } from './building/buildCSS.js';
+import { buildJS } from './building/buildJS.js';
+import { buildTypedoc } from './building/buildTypedoc.js';
+import { getPackageVersions } from './building/getPackageVersions.js';
+import { renderIndex } from './building/renderHtml.js';
+import { getCustomTypes } from './type-parsing/findCustomTypes.js';
+import { prepareModules } from './type-parsing/prepareModules.js';
+import type { TypeStringOptions } from './type-parsing/typeString.js';
+import type { Kind_Project } from './types.d.ts';
+import * as color from './utils/color.js';
 
 const lineFromText = (text: string, subtraction = 0) =>
-  Array(text.length - subtraction)
-    .fill("-")
-    .join("");
+	Array(text.length - subtraction)
+		.fill('-')
+		.join('');
 
 function logBox(text: string, colors = 0) {
-  const txt = `  ${text}  `;
-  const line = color.yellow(lineFromText(txt, colors * 9));
-  console.log(`\n${line}\n${txt}\n${line}\n`);
+	const txt = `  ${text}  `;
+	const line = color.yellow(lineFromText(txt, colors * 9));
+	console.log(`\n${line}\n${txt}\n${line}\n`);
 }
 
-const logSuccess = (text: string) =>
-  console.log(`${color.green("\u2713")} ${text}`);
+const logSuccess = (text: string) => console.log(`${color.green('\u2713')} ${text}`);
 
 async function build(packageName: string) {
-  const packagePath = dirname(require.resolve("@jsfns/" + packageName));
-  const docsPath = resolve("./docs");
+	const packagePath = dirname(require.resolve('@jsfns/' + packageName));
+	const docsPath = resolve('./docs');
 
-  const { version } = require(join(packagePath, "package.json")) as {
-    name: string;
-    version: string;
-  };
+	const { version } = require(join(packagePath, 'package.json')) as {
+		name: string;
+		version: string;
+	};
 
-  logBox(
-    `Building ${color.yellow("Docs")} for package: ${color.blue(packageName)} ${color.gray("@" + version)}`,
-    3,
-  );
+	logBox(
+		`Building ${color.yellow('Docs')} for package: ${color.blue(packageName)} ${color.gray('@' + version)}`,
+		3,
+	);
 
-  const docs = (await buildTypedoc(packagePath)) as unknown as Kind_Project;
+	const docs = (await buildTypedoc(packagePath)) as unknown as Kind_Project;
 
-  // NOTE Re-introduce to debug docs JSON
-  // await writeFile(
-  //   join(docsPath, packageName + ".json"),
-  //   JSON.stringify(docs, null, 2),
-  // );
+	// NOTE Re-introduce to debug docs JSON
+	// await writeFile(
+	//   join(docsPath, packageName + ".json"),
+	//   JSON.stringify(docs, null, 2),
+	// );
 
-  const options: TypeStringOptions = { hasFailure: false };
-  const modules = await prepareModules(docs.children, options);
-  if (options.hasFailure)
-    throw new Error("Some types failed to parse correctly");
+	const options: TypeStringOptions = { hasFailure: false };
+	const modules = await prepareModules(docs.children, options);
+	if (options.hasFailure) throw new Error('Some types failed to parse correctly');
 
-  const majorVersion = version.replace(/\d+$/, "x");
-  const versionPath = join(docsPath, packageName, majorVersion);
+	const majorVersion = version.replace(/\d+$/, 'x');
+	const versionPath = join(docsPath, packageName, majorVersion);
 
-  logSuccess("types parsed");
+	logSuccess('types parsed');
 
-  const allVersions = await getPackageVersions(docsPath);
-  await writeFile(join(docsPath, "versions.json"), JSON.stringify(allVersions));
+	const allVersions = await getPackageVersions(docsPath);
+	await writeFile(join(docsPath, 'versions.json'), JSON.stringify(allVersions));
 
-  logSuccess("Versions build");
+	logSuccess('Versions build');
 
-  const js = await buildJS();
+	const js = await buildJS();
 
-  logSuccess("JS build");
+	logSuccess('JS build');
 
-  const [landingCSS, packageCSS, versionCSS] = await Promise.all([
-    buildCSS("landing"),
-    buildCSS("package"),
-    buildCSS("version"),
-  ]);
+	const [landingCSS, packageCSS, versionCSS] = await Promise.all([
+		buildCSS('landing'),
+		buildCSS('package'),
+		buildCSS('version'),
+	]);
 
-  logSuccess("CSS build");
+	logSuccess('CSS build');
 
-  await mkdir(versionPath, { recursive: true });
+	await mkdir(versionPath, { recursive: true });
 
-  await renderIndex({
-    template: "version",
-    path: versionPath,
-    data: {
-      modules,
-      packageName,
-      displayVersion: version,
-      currentVersion: majorVersion,
-      customTypes: getCustomTypesArray(),
-      css: versionCSS,
-      js,
-    },
-  });
+	await renderIndex({
+		template: 'version',
+		path: versionPath,
+		data: {
+			modules,
+			packageName,
+			displayVersion: version,
+			currentVersion: majorVersion,
+			customTypes: await getCustomTypes(),
+			css: versionCSS,
+			js,
+		},
+	});
 
-  logSuccess(
-    `${color.blue(packageName + "/" + majorVersion + "/")}${color.yellow("index.html")} successfully generated`,
-  );
+	logSuccess(
+		`${color.blue(packageName + '/' + majorVersion + '/')}${color.yellow('index.html')} successfully generated`,
+	);
 
-  const indexes = [
-    {
-      template: "package",
-      path: join(docsPath, packageName),
-      data: {
-        packageName,
-        version: allVersions[packageName][0],
-        css: packageCSS,
-      },
-    },
-    {
-      template: "landing",
-      path: docsPath,
-      data: {
-        packages: Object.entries(allVersions).map(([name, [version]]) => ({
-          name,
-          version,
-        })),
-        css: landingCSS,
-      },
-    },
-  ];
+	const indexes = [
+		{
+			template: 'package',
+			path: join(docsPath, packageName),
+			data: {
+				packageName,
+				version: allVersions[packageName][0],
+				css: packageCSS,
+			},
+		},
+		{
+			template: 'landing',
+			path: docsPath,
+			data: {
+				packages: Object.entries(allVersions).map(([name, [version]]) => ({
+					name,
+					version,
+				})),
+				css: landingCSS,
+			},
+		},
+	];
 
-  await Promise.all(indexes.map(renderIndex));
+	await Promise.all(indexes.map(renderIndex));
 
-  logSuccess(
-    `${color.blue(packageName + "/")} and ${color.blue("./")} ${color.yellow("index.html")} successfully generated`,
-  );
+	logSuccess(
+		`${color.blue(packageName + '/')} and ${color.blue('./')} ${color.yellow('index.html')} successfully generated`,
+	);
 
-  logBox(
-    `${color.blue(packageName)} ${color.yellow("Docs")} generation complete`,
-    2,
-  );
+	logBox(`${color.blue(packageName)} ${color.yellow('Docs')} generation complete`, 2);
 }
 
-build("core")
-  .then(() => build("web"))
-  .catch(console.error);
+build('core')
+	.then(() => build('web'))
+	.catch(console.error);
