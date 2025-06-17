@@ -28,10 +28,8 @@ jobs:
       - name: Check for changes
         id: git-status
         run: git diff --exit-code
-        continue-on-error: true
 
       - name: Commit changes
-        if: steps.git-status.outputs.return-code == '0'
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
