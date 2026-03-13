@@ -10,14 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
           version: latest
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: pnpm
 
       - name: Install and Build
         run: |
@@ -27,11 +31,26 @@ jobs:
 
       - name: Check for changes
         id: git-status
-        run: git diff --exit-code
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Commit changes
+        if: steps.git-status.outputs.changed == 'true'
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
           git commit -am "Updated $(git ls-files --modified | grep -Po '(core|web)/\d+\.\d+\.x' | paste -sd '|' | sed 's/|/, /')"
           git push
+
+      - name: Deploy to jsfns gh-pages
+        if: steps.git-status.outputs.changed == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.ACCESS_TOKEN }}
+          external_repository: Tokimon/jsfns
+          publish_branch: gh-pages
+          publish_dir: ./docs
