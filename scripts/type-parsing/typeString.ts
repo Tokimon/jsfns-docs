@@ -1,11 +1,12 @@
+import type { JSONOutput } from 'typedoc';
 import { logFullObject } from '~scripts/utils/log.js';
-import type { All_Types } from '../types.d.ts';
 import { buildArray } from './buildArray.js';
 import { buildConditional } from './buildConditional.js';
 import { buildIndexedAccess } from './buildIndexedAccess.js';
 import { buildIntersection } from './buildIntersection.js';
 import { buildIntrinsic } from './buildIntrinsic.js';
 import { buildLiteral } from './buildLiteral.js';
+import { buildMapped } from './buildMapped.js';
 import { buildNamedTupleMember } from './buildNamedTupleMember.js';
 import { buildPredicate } from './buildPredicate.js';
 import { buildReference } from './buildReference.js';
@@ -21,7 +22,7 @@ export type TypeStringOptions = {
 	hasFailure: boolean;
 };
 export type TypeStringFunction = (
-	type: All_Types,
+	type: JSONOutput.SomeType,
 	options: TypeStringOptions,
 ) => string | 'FAILURE';
 
@@ -31,16 +32,15 @@ export const typeString: TypeStringFunction = (type, options) => {
 			case 'array':
 				return buildArray(type, options);
 			case 'predicate':
-				return buildPredicate(type);
+				return buildPredicate(type, options);
 			case 'intrinsic':
 				return buildIntrinsic(type, options);
 			case 'literal':
 				return buildLiteral(type, options);
 			case 'templateLiteral':
 				return buildTemplateLiteral(type, options);
-			case 'query': {
+			case 'query':
 				return typeString(type.queryType, options);
-			}
 			case 'tuple':
 				return buildTuple(type, options);
 			case 'intersection':
@@ -57,9 +57,14 @@ export const typeString: TypeStringFunction = (type, options) => {
 				return buildConditional(type, options);
 			case 'typeOperator':
 				return buildTypeOperator(type, options);
-			case 'indexedAccess': {
+			case 'indexedAccess':
 				return buildIndexedAccess(type, options);
-			}
+			case 'mapped':
+				return buildMapped(type, options);
+			case 'inferred':
+				return `infer ${type.name}`;
+			default:
+				throw 'Unknown type';
 		}
 	} catch {
 		options.hasFailure = true;

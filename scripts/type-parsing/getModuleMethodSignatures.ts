@@ -1,18 +1,18 @@
+import type { JSONOutput } from 'typedoc';
 import { ReflectionKind } from 'typedoc/models';
-import type { Kind_Module, Kind_Signature } from '~scripts/types.d.ts';
 
-export function getModuleMethodSignatures(module: Kind_Module) {
+export function getModuleMethodSignatures(module: JSONOutput.DeclarationReflection) {
 	let defaultFuncID = -1;
-	const moduleMethods: { id: number; signatures: Kind_Signature[] }[] = [];
+	const moduleMethods: { id: number; signatures: JSONOutput.SignatureReflection[] }[] = [];
 
-	for (const child of module.children) {
+	for (const child of module.children ?? []) {
 		if (child.kind === ReflectionKind.TypeAlias) continue;
 
 		if (child.kind === ReflectionKind.Reference) {
-			if (child.name === 'default') defaultFuncID = child.target;
+			if (child.name === 'default') defaultFuncID = (child as JSONOutput.ReferenceReflection).target;
 		} else if (child.kind === ReflectionKind.Function) {
 			const { id, signatures } = child;
-			moduleMethods.push({ id, signatures });
+			if (signatures) moduleMethods.push({ id, signatures });
 		} else {
 			let { signatures } = child;
 

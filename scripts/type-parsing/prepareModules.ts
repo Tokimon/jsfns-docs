@@ -1,4 +1,4 @@
-import type { Kind_Module } from '~scripts/types.d.ts';
+import type { JSONOutput } from 'typedoc';
 import { buildModuleMethod, type ModuleMethodSignature } from './buildModuleMethod.js';
 import { findCustomTypes } from './findCustomTypes.js';
 import { getModuleMethodSignatures } from './getModuleMethodSignatures.js';
@@ -9,7 +9,7 @@ export type ModuleEntry = {
 	functions: ModuleMethodSignature[];
 };
 
-export async function prepareModules(modules: Kind_Module[], options: TypeStringOptions) {
+export async function prepareModules(modules: JSONOutput.DeclarationReflection[], options: TypeStringOptions) {
 	const entries: ModuleEntry[] = [];
 
 	for (const module of modules) {

@@ -1,4 +1,4 @@
-import type { Kind_Signature } from '~scripts/types.d.ts';
+import type { JSONOutput } from 'typedoc';
 import { buildSignature } from './buildSignature.js';
 import { buildSummary } from './buildSummary.js';
 import { markdown } from './markdown.js';
@@ -14,7 +14,7 @@ export type ModuleMethodSignature = {
 };
 
 export async function buildModuleMethod(
-	method: Kind_Signature,
+	method: JSONOutput.SignatureReflection,
 	options: TypeStringOptions,
 ): Promise<ModuleMethodSignature> {
 	const { comment } = method;

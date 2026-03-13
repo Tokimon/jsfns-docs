@@ -1,5 +1,5 @@
-import type { Comment } from '../types.d.ts';
+import type { JSONOutput } from 'typedoc';
 import { buildSummary } from './buildSummary.js';
 
-export const buildComment = (comment?: Comment) =>
+export const buildComment = (comment?: JSONOutput.Comment) =>
 	comment ? buildSummary(comment.summary).split('\n') : [];

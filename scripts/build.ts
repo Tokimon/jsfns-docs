@@ -1,4 +1,5 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { buildCSS } from './building/buildCSS.js';
 import { buildJS } from './building/buildJS.js';
@@ -8,7 +9,6 @@ import { renderIndex } from './building/renderHtml.js';
 import { getCustomTypes } from './type-parsing/findCustomTypes.js';
 import { prepareModules } from './type-parsing/prepareModules.js';
 import type { TypeStringOptions } from './type-parsing/typeString.js';
-import type { Kind_Project } from './types.d.ts';
 import * as color from './utils/color.js';
 
 const lineFromText = (text: string, subtraction = 0) =>
@@ -25,10 +25,10 @@ function logBox(text: string, colors = 0) {
 const logSuccess = (text: string) => console.log(`${color.green('\u2713')} ${text}`);
 
 async function build(packageName: string) {
-	const packagePath = dirname(require.resolve('@jsfns/' + packageName));
+	const packagePath = dirname(fileURLToPath(import.meta.resolve('@jsfns/' + packageName)));
 	const docsPath = resolve('./docs');
 
-	const { version } = require(join(packagePath, 'package.json')) as {
+	const { version } = JSON.parse(await readFile(join(packagePath, 'package.json'), 'utf-8')) as {
 		name: string;
 		version: string;
 	};
@@ -38,7 +38,7 @@ async function build(packageName: string) {
 		3,
 	);
 
-	const docs = (await buildTypedoc(packagePath)) as unknown as Kind_Project;
+	const docs = await buildTypedoc(packagePath);
 
 	// NOTE Re-introduce to debug docs JSON
 	// await writeFile(
@@ -47,7 +47,7 @@ async function build(packageName: string) {
 	// );
 
 	const options: TypeStringOptions = { hasFailure: false };
-	const modules = await prepareModules(docs.children, options);
+	const modules = await prepareModules(docs.children ?? [], options);
 	if (options.hasFailure) throw new Error('Some types failed to parse correctly');
 
 	const majorVersion = version.replace(/\d+$/, 'x');

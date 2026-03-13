@@ -1,6 +1,6 @@
-import type { Summary } from '../types.d.ts';
+import type { JSONOutput } from 'typedoc';
 
-export const buildSummary = (summary: Summary[] = []) =>
+export const buildSummary = (summary: JSONOutput.CommentDisplayPart[] = []) =>
 	summary
 		.map(({ text, ...sum }) => {
 			if (sum.kind !== 'inline-tag') return text;

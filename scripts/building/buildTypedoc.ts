@@ -1,6 +1,6 @@
-import { Application, type NormalizedPath, TSConfigReader } from 'typedoc';
+import { Application, type JSONOutput, type NormalizedPath, TSConfigReader } from 'typedoc';
 
-export async function buildTypedoc(packagePath: string) {
+export async function buildTypedoc(packagePath: string): Promise<JSONOutput.ProjectReflection> {
 	const app = await Application.bootstrap(
 		{
 			entryPointStrategy: 'expand',
@@ -15,7 +15,6 @@ export async function buildTypedoc(packagePath: string) {
 
 	const project = await app.convert();
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!project) throw app.logger.errorCount;
 
 	return app.serializer.projectToObject(project, packagePath as NormalizedPath);

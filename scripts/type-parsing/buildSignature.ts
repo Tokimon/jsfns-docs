@@ -1,4 +1,4 @@
-import type { Kind_Signature } from '../types.d.ts';
+import type { JSONOutput } from 'typedoc';
 import { buildParam } from './buildProperty.js';
 import { buildSummary } from './buildSummary.js';
 import { TSCodeMarkdown } from './markdown.js';
@@ -6,13 +6,13 @@ import { type TypeStringOptions, typeString } from './typeString.js';
 
 export const buildSignature = async (
 	name: string,
-	signature: Kind_Signature,
+	signature: JSONOutput.SignatureReflection,
 	options: TypeStringOptions,
 ) => {
-	const { type, parameters, typeParameter } = signature;
+	const { type, parameters, typeParameters } = signature;
 	const params = (parameters?.map((param) => buildParam(param, options)) ?? []).join(', ');
 
-	let typeDef = typeParameter
+	let typeDef = typeParameters
 		?.map((t) => {
 			if (!t.type) return t.name;
 
@@ -33,7 +33,7 @@ export const buildSignature = async (
 		{},
 	);
 
-	const str = typeString(type, options);
+	const str = type ? typeString(type, options) : 'void';
 
 	let md = await TSCodeMarkdown(`${name}${typeDef || ''}(${params}): ${str}`);
 

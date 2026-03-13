@@ -1,6 +1,6 @@
-import type { Type_Intersection } from '~scripts/types.d.ts';
+import type { JSONOutput } from 'typedoc';
 import { buildTypeCollection } from './buildTypeCollection.js';
 import type { TypeStringOptions } from './typeString.js';
 
-export const buildIntersection = (type: Type_Intersection, options: TypeStringOptions) =>
+export const buildIntersection = (type: JSONOutput.IntersectionType, options: TypeStringOptions) =>
 	buildTypeCollection(type.types, options).join(' & ');

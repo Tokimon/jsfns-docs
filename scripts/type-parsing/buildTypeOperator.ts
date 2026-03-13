@@ -1,7 +1,7 @@
-import type { Type_TypeOperator } from '../types.d.ts';
+import type { JSONOutput } from 'typedoc';
 import { type TypeStringOptions, typeString } from './typeString.js';
 
-export function buildTypeOperator(type: Type_TypeOperator, options: TypeStringOptions) {
+export function buildTypeOperator(type: JSONOutput.TypeOperatorType, options: TypeStringOptions) {
 	if (!type.target) return type.operator;
 
 	const targetStr = typeString(type.target, options);

@@ -1,12 +1,12 @@
+import type { JSONOutput } from 'typedoc';
 import { ReflectionKind } from 'typedoc/models';
-import type { Kind_Module, Kind_TypeAlias } from '~scripts/types.d.ts';
 import { buildTypeAlias } from './buildTypeAlias.js';
 import { TSCodeMarkdown } from './markdown.js';
 import type { TypeStringOptions } from './typeString.js';
 
 const store = new Map<string, { type: string; moduleName: string }>();
 
-function addCustomType(type: Kind_TypeAlias, moduleName: string, options: TypeStringOptions) {
+function addCustomType(type: JSONOutput.DeclarationReflection, moduleName: string, options: TypeStringOptions) {
 	if (!store.has(type.name))
 		store.set(type.name, { type: buildTypeAlias(type, options), moduleName });
 }
@@ -31,7 +31,7 @@ export const getCustomTypes = () => {
 	return Promise.all(customTypes);
 };
 
-export function findCustomTypes(module: Kind_Module, options: TypeStringOptions) {
-	for (const child of module.children)
+export function findCustomTypes(module: JSONOutput.DeclarationReflection, options: TypeStringOptions) {
+	for (const child of module.children ?? [])
 		if (child.kind === ReflectionKind.TypeAlias) addCustomType(child, module.name, options);
 }
