@@ -1,0 +1,1 @@
+import{t as e}from"../chunks/DDJJNG5z.js";import{r as t}from"../chunks/0SF19zAo.js";function n(e,n){throw new t(e,n.toString())}var r=e({load:()=>i});function i({params:e}){let t={core:[`1.2.x`,`1.1.x`,`1.0.x`],web:[`1.1.x`]}[e.package];n(307,t?.length?`/${e.package}/${t[0]}`:`/`)}export{r as universal};

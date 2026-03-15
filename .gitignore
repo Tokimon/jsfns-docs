@@ -129,6 +129,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# Cutstom
-docs/web.json
-docs/core.json
+# SvelteKit
+.svelte-kit
+
