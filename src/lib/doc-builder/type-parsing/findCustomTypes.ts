@@ -6,7 +6,11 @@ import type { TypeStringOptions } from './typeString.js';
 
 const store = new Map<string, { type: string; moduleName: string }>();
 
-function addCustomType(type: JSONOutput.DeclarationReflection, moduleName: string, options: TypeStringOptions) {
+function addCustomType(
+	type: JSONOutput.DeclarationReflection,
+	moduleName: string,
+	options: TypeStringOptions,
+) {
 	if (!store.has(type.name))
 		store.set(type.name, { type: buildTypeAlias(type, options), moduleName });
 }
@@ -33,7 +37,10 @@ export const getCustomTypes = () => {
 
 export const isCustomType = (name: string) => store.has(name);
 
-export function findCustomTypes(module: JSONOutput.DeclarationReflection, options: TypeStringOptions) {
+export function findCustomTypes(
+	module: JSONOutput.DeclarationReflection,
+	options: TypeStringOptions,
+) {
 	for (const child of module.children ?? [])
 		if (child.kind === ReflectionKind.TypeAlias) addCustomType(child, module.name, options);
 }

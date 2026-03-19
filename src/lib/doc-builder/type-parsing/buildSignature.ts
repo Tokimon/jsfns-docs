@@ -18,7 +18,7 @@ export const buildSignature = async (
 
 			const str = typeString(t.type, options);
 
-			return `${t.name}extends ${str}`;
+			return `${t.name} extends ${str}`;
 		})
 		.join(', ');
 

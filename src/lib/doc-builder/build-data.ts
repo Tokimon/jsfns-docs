@@ -1,6 +1,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { buildTypedoc } from './building/buildTypedoc.js';
 import { getCustomTypes } from './type-parsing/findCustomTypes.js';
 import { prepareModules } from './type-parsing/prepareModules.js';

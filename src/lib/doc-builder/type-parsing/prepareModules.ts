@@ -9,7 +9,10 @@ export type ModuleEntry = {
 	functions: ModuleMethodSignature[];
 };
 
-export async function prepareModules(modules: JSONOutput.DeclarationReflection[], options: TypeStringOptions) {
+export async function prepareModules(
+	modules: JSONOutput.DeclarationReflection[],
+	options: TypeStringOptions,
+) {
 	const entries: ModuleEntry[] = [];
 
 	for (const module of modules) {

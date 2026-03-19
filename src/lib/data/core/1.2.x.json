@@ -49,7 +49,7 @@
       "name": "debounce",
       "functions": [
         {
-          "definition": "<pre><code class=\"hljs language-ts\"><span class=\"hljs-title function_\">debounce</span>&lt;<span class=\"hljs-title class_\">Textends</span> <span class=\"hljs-title class_\" data-custom-type=\"DebounceCallback\">DebounceCallback</span>&gt;(<span class=\"hljs-attr\" title=\"The function to add debounce to\">callback</span>: T, <span class=\"hljs-attr\" title=\"Number of milliseconds without another call to trigger the last function\">ms</span>?: <span class=\"hljs-built_in\">number</span>): <span class=\"hljs-title class_\" data-custom-type=\"DebouncedFunction\">DebouncedFunction</span>&lt;T&gt;\n</code></pre>",
+          "definition": "<pre><code class=\"hljs language-ts\"><span class=\"hljs-title function_\">debounce</span>&lt;T <span class=\"hljs-keyword\">extends</span> <span class=\"hljs-title class_\" data-custom-type=\"DebounceCallback\">DebounceCallback</span>&gt;(<span class=\"hljs-attr\" title=\"The function to add debounce to\">callback</span>: T, <span class=\"hljs-attr\" title=\"Number of milliseconds without another call to trigger the last function\">ms</span>?: <span class=\"hljs-built_in\">number</span>): <span class=\"hljs-title class_\" data-custom-type=\"DebouncedFunction\">DebouncedFunction</span>&lt;T&gt;\n</code></pre>",
           "comment": "<p>Ensure that the givcen <code>callback</code> function will only be called <code>ms</code> milliseconds after the last call.<br>This ensures to not trigger too many consecutive calls, but only the last in the sequence.</p>\n",
           "examples": [],
           "remarks": [],
@@ -544,7 +544,7 @@
       "name": "throttle",
       "functions": [
         {
-          "definition": "<pre><code class=\"hljs language-ts\"><span class=\"hljs-title function_\">throttle</span>&lt;<span class=\"hljs-title class_\">Textends</span> (<span class=\"hljs-attr\">args</span>: <span class=\"hljs-built_in\">unknown</span>[]) =&gt; <span class=\"hljs-built_in\">void</span>&gt;(<span class=\"hljs-attr\" title=\"The function to throttle\">callback</span>: T, <span class=\"hljs-attr\" title=\"Number of milliseconds before the function can be called again\">ms</span>?: <span class=\"hljs-built_in\">number</span>): T\n</code></pre>",
+          "definition": "<pre><code class=\"hljs language-ts\"><span class=\"hljs-title function_\">throttle</span>&lt;T <span class=\"hljs-title function_\">extends</span> (<span class=\"hljs-attr\">args</span>: <span class=\"hljs-built_in\">unknown</span>[]) =&gt; <span class=\"hljs-built_in\">void</span>&gt;(<span class=\"hljs-attr\" title=\"The function to throttle\">callback</span>: T, <span class=\"hljs-attr\" title=\"Number of milliseconds before the function can be called again\">ms</span>?: <span class=\"hljs-built_in\">number</span>): T\n</code></pre>",
           "comment": "<p>Ensure that the given <code>callback</code> function can only be called every <code>ms</code> milliseconds</p>\n",
           "examples": [],
           "remarks": [],

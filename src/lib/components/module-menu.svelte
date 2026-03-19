@@ -161,6 +161,7 @@ function handleKeydown(e: KeyboardEvent) {
 			color: #ccc;
 			text-decoration: none;
 			padding: 10px;
+			padding-left: 30px;
 			display: block;
 			transition: all 0.2s;
 
@@ -172,18 +173,21 @@ function handleKeydown(e: KeyboardEvent) {
 
 			&:focus {
 			    box-shadow: inset 5px 0 0 rgba(255, 255, 255, 0.15);
-				padding-left: 20px;
 			}
 
 			&:focus-visible {
 				outline-offset: -2px;
 			}
-		}
 
-		a.current {
-			background: rgba(122, 150, 174, 0.25);
-			box-shadow: inset 5px 0 0 var(--focus-color);
-			padding-left: 20px;
+			&.current,
+			&:focus {
+		    	padding-left: 20px;
+			}
+
+			&.current {
+				background: rgba(122, 150, 174, 0.25);
+				box-shadow: inset 5px 0 0 var(--focus-color);
+			}
 		}
 	}
 

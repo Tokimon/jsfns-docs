@@ -9,7 +9,8 @@ export function getModuleMethodSignatures(module: JSONOutput.DeclarationReflecti
 		if (child.kind === ReflectionKind.TypeAlias) continue;
 
 		if (child.kind === ReflectionKind.Reference) {
-			if (child.name === 'default') defaultFuncID = (child as JSONOutput.ReferenceReflection).target;
+			if (child.name === 'default')
+				defaultFuncID = (child as JSONOutput.ReferenceReflection).target;
 		} else if (child.kind === ReflectionKind.Function) {
 			const { id, signatures } = child;
 			if (signatures) moduleMethods.push({ id, signatures });
