@@ -61,10 +61,20 @@ function handleTypeClick(e: MouseEvent) {
 	css(elm, 'anchor-name', `--anchor-${type}`);
 	tooltip.showPopover();
 
-	on(tooltip, 'beforetoggle', () => requestAnimationFrame(clearAnchor), {
-		once: true,
-		when: (e) => e.newState === 'closed',
-	});
+	on(
+		tooltip,
+		'beforetoggle',
+		() => {
+			const anchor = activeAnchor;
+			requestAnimationFrame(() => {
+				if (activeAnchor === anchor) clearAnchor();
+			});
+		},
+		{
+			once: true,
+			when: (e) => e.newState === 'closed',
+		},
+	);
 }
 </script>
 

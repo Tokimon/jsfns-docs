@@ -1,4 +1,4 @@
-import { realpath, writeFile, unlink } from 'node:fs/promises';
+import { realpath, unlink, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { Application, type JSONOutput, type NormalizedPath, TSConfigReader } from 'typedoc';
 

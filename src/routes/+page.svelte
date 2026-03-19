@@ -1,4 +1,6 @@
 <script>
+import { url } from '$lib/url.js';
+
 const { data } = $props();
 </script>
 
@@ -9,7 +11,7 @@ const { data } = $props();
 <main>
 	<h1>@jsfns</h1>
 	{#each data.packages as { name, version }}
-		<a class="package-link" href="/{name}/{version}">{name} <small>v{version}</small></a>
+		<a class="package-link" href={url(name, version)}>{name} <small>v{version}</small></a>
 	{/each}
 </main>
 

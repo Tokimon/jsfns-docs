@@ -1,11 +1,13 @@
 <script lang='ts'>
+import { url } from '$lib/url.js';
+
 const { packageName } = $props();
 </script>
 
 <h2 class="page-title">
 	@jsfns/
-	<a href="/core" class:selected={packageName === 'core'}>core</a>
-	<a href="/web" class:selected={packageName === 'web'}>web</a>
+	<a href={url('core')} class:selected={packageName === 'core'}>core</a>
+	<a href={url('web')} class:selected={packageName === 'web'}>web</a>
 </h2>
 
 <style>

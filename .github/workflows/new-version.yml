@@ -27,7 +27,7 @@ jobs:
         run: |
           pnpm i
           pnpm update
-          pnpm build
+          BASE_PATH=/jsfns pnpm build
 
       - name: Check for changes
         id: git-status

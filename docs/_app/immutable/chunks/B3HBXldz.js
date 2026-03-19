@@ -1,0 +1,1 @@
+import{s as e}from"./B5YXpv3q.js";function t(...t){return[e].concat(t).join(`/`)||`/`}export{t};

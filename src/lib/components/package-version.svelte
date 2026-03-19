@@ -1,38 +1,44 @@
 <script lang="ts">
+import { url } from '$lib/url.js';
+
 const { allVersions, version, packageName } = $props();
 </script>
 
-<div class="package-version">
 	{#if allVersions.length > 1}
-		<button class="version current-version" popovertarget="version-list">v. {version}</button>
+		<button class="current-version" popovertarget="version-list">v. {version}</button>
 		<ul class="version-list" id="version-list" popover>
 			{#each allVersions as v}
 				<li>
 					{#if v === version}
 						<div class="version selected">v. {v}</div>
 					{:else}
-						<a href="/{packageName}/{v}" class="version">v. {v}</a>
+						<a href={url(packageName, v)} class="version">v. {v}</a>
 					{/if}
 				</li>
 			{/each}
 		</ul>
 	{:else}
-		<div class="version current-version">v. {version}</div>
+		<div class="current-version">v. {version}</div>
 	{/if}
-</div>
 
 <style>
-	.package-version {
-		position: relative;
+
+	.current-version,
+	.version {
+
+	cursor: pointer;
+	white-space: nowrap;
+	line-height: 2;
+	padding: 0 15px;
+	color: white;
 	}
 
 	.version {
-		cursor: default;
-		display: block;
-		white-space: nowrap;
-		line-height: 2;
-		padding: 0 15px;
-		color: white;
+	display: block;
+
+		&:hover {
+			background: #555;
+		}
 
 		&.selected {
 			background: var(--focus-color);
@@ -42,21 +48,26 @@ const { allVersions, version, packageName } = $props();
 	}
 
 	.current-version {
-		padding: 2px 15px;
+
+	background: none;
+	color: inherit;
+	font: inherit;
+		padding: 5px 15px;
+		border-radius: 5px;
 		cursor: pointer;
 		anchor-name: --version-trigger;
-	}
+		border: 1px solid transparent;
+		transition: border-color 0.2s ease;
 
-	button.current-version {
-		background: none;
-		border: none;
-		color: inherit;
-		font: inherit;
+		&:hover,
+	&:focus-visible {
+		    border-color: var(--focus-color);
+		}
 	}
 
 	.version-list {
 		list-style: none;
-		margin: 0;
+		margin: 5px 0 0 0;
 		padding: 0;
 		background: var(--module-bg-color);
 		border: 1px solid var(--border-color);

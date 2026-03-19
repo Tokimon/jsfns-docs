@@ -23,10 +23,10 @@ const ho: SynchronousOptions = {
 			);
 		}
 
-		html = html.replaceAll(
-			/<span class="hljs-title class_">(\w+)<\/span>/g,
-			(match, name) =>
-				isCustomType(name) ? `<span class="hljs-title class_" data-custom-type="${name}">${name}</span>` : match,
+		html = html.replaceAll(/<span class="hljs-title class_">(\w+)<\/span>/g, (match, name) =>
+			isCustomType(name)
+				? `<span class="hljs-title class_" data-custom-type="${name}">${name}</span>`
+				: match,
 		);
 
 		return html;
