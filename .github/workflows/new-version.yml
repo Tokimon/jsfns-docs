@@ -26,7 +26,7 @@ jobs:
       - name: Install and Build
         run: |
           pnpm i
-          pnpm update
+          pnpm update @jsfns/core @jsfns/web
           BASE_PATH=/jsfns pnpm build
 
       - name: Check for changes
