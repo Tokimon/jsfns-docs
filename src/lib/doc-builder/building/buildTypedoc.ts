@@ -1,14 +1,15 @@
+import { randomUUID } from 'node:crypto';
 import { realpath, unlink, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { Application, type JSONOutput, type NormalizedPath, TSConfigReader } from 'typedoc';
 
 const cwd = process.cwd();
-let tsconfigCounter = 0;
 
 export async function buildTypedoc(packagePath: string): Promise<JSONOutput.ProjectReflection> {
-	const tempTsconfig = join(cwd, `.tsconfig.jsdoc.${tsconfigCounter++}.json`);
+	const tempTsconfig = join(cwd, `.tsconfig.jsdoc.${randomUUID()}.json`);
 	const realPackagePath = await realpath(packagePath);
 	const relPath = relative(cwd, realPackagePath);
+
 	await writeFile(
 		tempTsconfig,
 		JSON.stringify({
@@ -36,6 +37,8 @@ export async function buildTypedoc(packagePath: string): Promise<JSONOutput.Proj
 
 		return app.serializer.projectToObject(project, packagePath as NormalizedPath);
 	} finally {
-		await unlink(tempTsconfig).catch(() => {});
+		await unlink(tempTsconfig).catch((err) => {
+			console.warn(`Failed to remove temp tsconfig ${tempTsconfig}: ${err.message}`);
+		});
 	}
 }
