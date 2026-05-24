@@ -9,10 +9,12 @@
 	"scripts": {
 		"build-data": "tsx ./src/lib/doc-builder/build-data.ts",
 		"dev": "vite dev",
-		"build": "tsx ./src/lib/doc-builder/build-data.ts && vite build",
+		"build": "./bin/build.sh",
 		"preview": "pnpm build && vite preview",
-		"check": "biome check --error-on-warnings --write .",
-		"typecheck": "tsgo --noEmit"
+		"check": "biome check --error-on-warnings .",
+		"format": "biome check --error-on-warnings --write .",
+		"typecheck": "tsgo --noEmit",
+		"validate": "pnpm check && pnpm typecheck"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.7",
