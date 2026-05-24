@@ -26,7 +26,7 @@ export async function buildTypedoc(packagePath: string): Promise<JSONOutput.Proj
 				tsconfig: tempTsconfig,
 				exclude: ['**/index.d.ts'],
 				entryPoints: [packagePath],
-				treatWarningsAsErrors: false,
+				treatWarningsAsErrors: true,
 			},
 			[new TSConfigReader()],
 		);
