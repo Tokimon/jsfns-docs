@@ -2,6 +2,10 @@ name: New JSFNS version responder
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to rebuild against (e.g. @jsfns/core@1.2.2)'
+        required: true
   repository_dispatch:
     types: [new-version]
 
@@ -23,31 +27,22 @@ jobs:
           node-version: latest
           cache: pnpm
 
-      - name: Install and Build
+      - name: Parse dispatched tag
+        id: parse
         run: |
-          pnpm i
-          pnpm update @jsfns/core @jsfns/web
-          BASE_PATH=/jsfns pnpm build
+          TAG="${{ github.event.client_payload.tag || github.event.inputs.tag }}"
+          SPEC="${TAG#@jsfns/}"
+          echo "spec=$SPEC" >> "$GITHUB_OUTPUT"
 
-      - name: Check for changes
-        id: git-status
-        run: |
-          if git diff --quiet; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
+      - name: Install
+        run: pnpm install
 
-      - name: Commit changes
-        if: steps.git-status.outputs.changed == 'true'
-        run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-          git commit -am "Updated $(git ls-files --modified | grep -Po '(core|web)/\d+\.\d+\.x' | paste -sd '|' | sed 's/|/, /')"
-          git push
+      - name: Build
+        env:
+          BASE_PATH: /jsfns
+        run: pnpm build ${{ steps.parse.outputs.spec }}
 
       - name: Deploy to jsfns gh-pages
-        if: steps.git-status.outputs.changed == 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.ACCESS_TOKEN }}
