@@ -26,6 +26,9 @@ const config = {
 		paths: {
 			base: basePath,
 		},
+		version: {
+			name: 'static',
+		},
 	},
 };
 
