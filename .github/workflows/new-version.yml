@@ -4,21 +4,28 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag to rebuild against (e.g. @jsfns/core@1.2.2)'
-        required: true
+        description: 'Optional tag (informational only — build always uses latest)'
+        required: false
   repository_dispatch:
     types: [new-version]
+
+concurrency:
+  group: docs-rebuild
+  cancel-in-progress: true
 
 jobs:
   new-jsfns-version:
     runs-on: ubuntu-latest
     steps:
+      - name: Debounce simultaneous dispatches
+        run: sleep 60
+
       - name: Checkout
         uses: actions/checkout@v6
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: latest
 
@@ -27,20 +34,13 @@ jobs:
           node-version: latest
           cache: pnpm
 
-      - name: Parse dispatched tag
-        id: parse
-        run: |
-          TAG="${{ github.event.client_payload.tag || github.event.inputs.tag }}"
-          SPEC="${TAG#@jsfns/}"
-          echo "spec=$SPEC" >> "$GITHUB_OUTPUT"
-
       - name: Install
         run: pnpm install
 
       - name: Build
         env:
           BASE_PATH: /jsfns
-        run: pnpm build ${{ steps.parse.outputs.spec }}
+        run: pnpm build
 
       - name: Deploy to jsfns gh-pages
         uses: peaceiris/actions-gh-pages@v4
