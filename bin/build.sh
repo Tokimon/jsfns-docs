@@ -12,6 +12,8 @@ done
 
 if [ ${#SPECS[@]} -gt 0 ]; then
   pnpm add "${SPECS[@]}"
+else
+  pnpm update @jsfns/core @jsfns/web --latest
 fi
 
 pnpm exec svelte-kit sync
