@@ -1,1 +1,0 @@
-import{s as e}from"./fBf5YXIk.js";function t(...t){return[e].concat(t).join(`/`)||`/`}export{t};
