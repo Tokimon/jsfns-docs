@@ -1,6 +1,5 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
 import { buildTypedoc } from './building/buildTypedoc.js';
 import { getCustomTypes } from './type-parsing/findCustomTypes.js';
 import { prepareModules } from './type-parsing/prepareModules.js';
@@ -23,7 +22,7 @@ const logSuccess = (text: string) => console.log(`${color.green('\u2713')} ${tex
 const dataPath = resolve('./src/lib/data');
 
 async function build(packageName: string) {
-	const packagePath = dirname(fileURLToPath(import.meta.resolve('@jsfns/' + packageName)));
+	const packagePath = await realpath(resolve('node_modules/@jsfns/' + packageName));
 
 	const { version } = JSON.parse(await readFile(join(packagePath, 'package.json'), 'utf-8')) as {
 		name: string;
