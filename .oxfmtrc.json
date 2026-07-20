@@ -1,0 +1,9 @@
+{
+	"printWidth": 100,
+	"useTabs": true,
+	"singleQuote": true,
+	"semi": true,
+	"trailingComma": "all",
+	"svelte": true,
+	"ignorePatterns": ["docs/**"]
+}
