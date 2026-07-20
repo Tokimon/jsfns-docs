@@ -1,8 +1,10 @@
 <script lang="ts">
-const { name, markdown } = $props();
+	const { name, markdown } = $props();
 </script>
 
-<div class="tooltip" id="Tooltip-{name}" style="position-anchor: --anchor-{name}" popover>{@html markdown}</div>
+<div class="tooltip" id="Tooltip-{name}" style="position-anchor: --anchor-{name}" popover>
+	{@html markdown}
+</div>
 
 <style>
 	.tooltip {

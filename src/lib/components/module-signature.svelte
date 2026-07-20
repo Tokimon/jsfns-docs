@@ -1,5 +1,5 @@
 <script lang="ts">
-const { func } = $props();
+	const { func } = $props();
 </script>
 
 <div class="signature">
@@ -10,7 +10,7 @@ const { func } = $props();
 			<div class="signature-description">{@html func.comment}</div>
 		{/if}
 
-		{#each func.remarks as remark}
+		{#each func.remarks as remark (remark)}
 			<fieldset class="signature-remark">
 				<legend>Note</legend>
 				{@html remark}
@@ -24,7 +24,7 @@ const { func } = $props();
 		{#if func.examples.length}
 			<details class="examples">
 				<summary>Examples</summary>
-				{#each func.examples as example}
+				{#each func.examples as example (example)}
 					{@html example}
 				{/each}
 			</details>
@@ -126,7 +126,7 @@ const { func } = $props();
 		border-bottom: 1px dashed transparent;
 
 		&:hover {
-		    border-bottom-color: currentColor;
+			border-bottom-color: currentColor;
 		}
 	}
 

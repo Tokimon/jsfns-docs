@@ -1,7 +1,7 @@
 <script>
-import { url } from '$lib/url.js';
+	import { resolve } from '$app/paths';
 
-const { data } = $props();
+	const { data } = $props();
 </script>
 
 <svelte:head>
@@ -10,8 +10,10 @@ const { data } = $props();
 
 <main>
 	<h1>@jsfns</h1>
-	{#each data.packages as { name, version }}
-		<a class="package-link" href={url(name, version)}>{name} <small>v{version}</small></a>
+	{#each data.packages as { name, version } (name)}
+		<a class="package-link" href={resolve('/[package]/[version]', { package: name, version })}
+			>{name} <small>v{version}</small></a
+		>
 	{/each}
 </main>
 

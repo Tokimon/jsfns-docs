@@ -1,17 +1,19 @@
-<script lang='ts'>
-import { url } from '$lib/url.js';
+<script lang="ts">
+	import { resolve } from '$app/paths';
 
-const { packageName } = $props();
+	const { packageName } = $props();
 </script>
 
 <h2 class="page-title">
 	@jsfns/
-	<a href={url('core')} class:selected={packageName === 'core'}>core</a>
-	<a href={url('web')} class:selected={packageName === 'web'}>web</a>
+	<a href={resolve('/[package]', { package: 'core' })} class:selected={packageName === 'core'}
+		>core</a
+	>
+	<a href={resolve('/[package]', { package: 'web' })} class:selected={packageName === 'web'}>web</a>
 </h2>
 
 <style>
-    .page-title {
+	.page-title {
 		margin: 0;
 		font-size: 18px;
 		flex: 1 1 100%;

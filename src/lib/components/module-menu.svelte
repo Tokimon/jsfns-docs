@@ -1,122 +1,145 @@
 <script lang="ts">
-let {
-	modules,
-	open = false,
-	onclose,
-	navEl = $bindable(),
-}: {
-	modules: { name: string }[];
-	open?: boolean;
-	onclose?: () => void;
-	navEl?: HTMLElement;
-} = $props();
+	/* eslint-disable prefer-const -- navEl is reassigned via bind:this, so the destructure can't be const */
+	let {
+		modules,
+		open = false,
+		onclose,
+		navEl = $bindable(),
+	}: {
+		modules: { name: string }[];
+		open?: boolean;
+		onclose?: () => void;
+		navEl?: HTMLElement;
+	} = $props();
+	/* eslint-enable prefer-const */
 
-function shortcutHint() {
-	if (typeof navigator === 'undefined') return 'Ctrl+K';
-	return /Mac|iPhone|iPad/.test(navigator.userAgent) ? '⌘K' : 'Ctrl+K';
-}
-
-let inputEl: HTMLInputElement;
-let filter = $state('');
-let hasFocus = $state(false);
-let currentHash = $state('');
-
-const filtered = $derived(
-	modules.filter((m) => m.name.toLowerCase().includes(filter.toLowerCase())),
-);
-
-function updateHash() {
-	currentHash = location.hash;
-}
-
-$effect(() => {
-	updateHash();
-});
-
-function clearFilter() {
-	filter = '';
-}
-
-function handleLinkClick(e: MouseEvent) {
-	if (window.matchMedia('(max-width: 799px)').matches) {
-		onclose?.();
-	} else {
-		requestAnimationFrame(() => (e.target as HTMLElement).focus());
+	function shortcutHint() {
+		if (typeof navigator === 'undefined') return 'Ctrl+K';
+		return /Mac|iPhone|iPad/.test(navigator.userAgent) ? '⌘K' : 'Ctrl+K';
 	}
-}
 
-function handleKeydown(e: KeyboardEvent) {
-	const hasModifier = e.ctrlKey || e.metaKey || e.altKey;
-	if (hasModifier) return;
+	let inputEl: HTMLInputElement;
+	let filter = $state('');
+	let hasFocus = $state(false);
+	let currentHash = $state('');
 
-	if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-		e.preventDefault();
-		const focused = navEl?.querySelector('a:focus') as HTMLElement | null;
+	const filtered = $derived(
+		modules.filter((m) => m.name.toLowerCase().includes(filter.toLowerCase())),
+	);
 
-		if (!focused) {
-			if (e.key === 'ArrowDown') {
-				const current = navEl?.querySelector('a.current') as HTMLElement | null;
-				(current ?? (navEl?.querySelector('.menu-list-item a') as HTMLElement))?.focus();
+	function updateHash() {
+		currentHash = location.hash;
+	}
+
+	$effect(() => {
+		updateHash();
+	});
+
+	function clearFilter() {
+		filter = '';
+	}
+
+	function handleLinkClick(e: MouseEvent) {
+		if (window.matchMedia('(max-width: 799px)').matches) {
+			onclose?.();
+		} else {
+			requestAnimationFrame(() => (e.target as HTMLElement).focus());
+		}
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		const hasModifier = e.ctrlKey || e.metaKey || e.altKey;
+		if (hasModifier) return;
+
+		if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+			e.preventDefault();
+			const focused = navEl?.querySelector('a:focus') as HTMLElement | null;
+
+			if (!focused) {
+				if (e.key === 'ArrowDown') {
+					const current = navEl?.querySelector('a.current') as HTMLElement | null;
+					(current ?? (navEl?.querySelector('.menu-list-item a') as HTMLElement))?.focus();
+				}
+				return;
 			}
+
+			const sibling =
+				e.key === 'ArrowDown'
+					? focused.parentElement?.nextElementSibling?.firstElementChild
+					: focused.parentElement?.previousElementSibling?.firstElementChild;
+
+			(sibling as HTMLElement)?.focus();
 			return;
 		}
 
-		const sibling =
-			e.key === 'ArrowDown'
-				? focused.parentElement?.nextElementSibling?.firstElementChild
-				: focused.parentElement?.previousElementSibling?.firstElementChild;
+		if (e.key === 'Home') {
+			e.preventDefault();
+			inputEl?.focus();
+			return;
+		}
 
-		(sibling as HTMLElement)?.focus();
-		return;
-	}
+		if (e.key === 'Delete') {
+			e.preventDefault();
+			clearFilter();
+			inputEl?.focus();
+			return;
+		}
 
-	if (e.key === 'Home') {
-		e.preventDefault();
-		inputEl?.focus();
-		return;
-	}
+		if (e.key === 'Escape') {
+			clearFilter();
+			e.preventDefault();
+			(document.activeElement as HTMLElement)?.blur();
+			return;
+		}
 
-	if (e.key === 'Delete') {
-		e.preventDefault();
-		clearFilter();
-		inputEl?.focus();
-		return;
+		// Printable character — redirect to filter input
+		if (e.key.length === 1 && document.activeElement !== inputEl) {
+			inputEl?.focus();
+			return;
+		}
 	}
-
-	if (e.key === 'Escape') {
-		clearFilter();
-		e.preventDefault();
-		(document.activeElement as HTMLElement)?.blur();
-		return;
-	}
-
-	// Printable character — redirect to filter input
-	if (e.key.length === 1 && document.activeElement !== inputEl) {
-		inputEl?.focus();
-		return;
-	}
-}
 </script>
 
 <svelte:window onhashchange={updateHash} />
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<nav class="menu" class:open bind:this={navEl} onkeydown={handleKeydown} onfocusin={() => hasFocus = true} onfocusout={() => hasFocus = false} tabindex="0">
+<nav
+	class="menu"
+	class:open
+	bind:this={navEl}
+	onkeydown={handleKeydown}
+	onfocusin={() => (hasFocus = true)}
+	onfocusout={() => (hasFocus = false)}
+	tabindex="0"
+>
 	<label class="menu-search">
-        <input name='menu-filter' type="text" autocomplete="off" placeholder='Type to filter...' bind:value={filter} bind:this={inputEl} />
-        <kbd>[{hasFocus ? 'Home' : shortcutHint()}]</kbd>
-        <button class="clear-filter" onclick={clearFilter} aria-label='clear filter'>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'>
-                <path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/>
-            </svg>
-        </button>
+		<input
+			name="menu-filter"
+			type="text"
+			autocomplete="off"
+			placeholder="Type to filter..."
+			bind:value={filter}
+			bind:this={inputEl}
+		/>
+		<kbd>[{hasFocus ? 'Home' : shortcutHint()}]</kbd>
+		<button class="clear-filter" onclick={clearFilter} aria-label="clear filter">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23777">
+				<path
+					d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+				/>
+			</svg>
+		</button>
 	</label>
 
 	<ul class="menu-list">
-		{#each filtered as module}
+		{#each filtered as module (module.name)}
 			<li class="menu-list-item">
-				<a href="#{module.name}" class:current={currentHash === `#${module.name}`} onclick={handleLinkClick}>{module.name}</a>
+				<a
+					href="#{module.name}"
+					class:current={currentHash === `#${module.name}`}
+					onclick={handleLinkClick}>{module.name}</a
+				>
 			</li>
 		{/each}
 	</ul>
@@ -172,7 +195,7 @@ function handleKeydown(e: KeyboardEvent) {
 			}
 
 			&:focus {
-			    box-shadow: inset 5px 0 0 rgba(255, 255, 255, 0.15);
+				box-shadow: inset 5px 0 0 rgba(255, 255, 255, 0.15);
 			}
 
 			&:focus-visible {
@@ -181,7 +204,7 @@ function handleKeydown(e: KeyboardEvent) {
 
 			&.current,
 			&:focus {
-		    	padding-left: 20px;
+				padding-left: 20px;
 			}
 
 			&.current {
@@ -192,7 +215,7 @@ function handleKeydown(e: KeyboardEvent) {
 	}
 
 	.menu-search {
-	    display: grid;
+		display: grid;
 		align-items: center;
 		border-radius: 4px;
 		border: 1px solid var(--border-color);
@@ -201,7 +224,7 @@ function handleKeydown(e: KeyboardEvent) {
 		grid-template-columns: 1fr auto;
 
 		input {
-		    background-color: transparent;
+			background-color: transparent;
 			border: none;
 			flex: 1 1 auto;
 			padding: 10px;
@@ -213,29 +236,29 @@ function handleKeydown(e: KeyboardEvent) {
 
 			&:hover,
 			&:focus {
-			    outline: none;
+				outline: none;
 
 				& ~ kbd {
-                    opacity: 0;
+					opacity: 0;
 				}
 
 				& ~ .clear-filter {
-                    opacity: 1;
+					opacity: 1;
 				}
 			}
 		}
 
 		.clear-filter {
-		    padding: 5px;
+			padding: 5px;
 			background: none;
 			border: none;
 			cursor: pointer;
 			grid-column: 2/2;
-            grid-row: 1/1;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            justify-self: end;
-            width: 30px;
+			grid-row: 1/1;
+			opacity: 0;
+			transition: opacity 0.2s ease;
+			justify-self: end;
+			width: 30px;
 			height: 30px;
 
 			svg {
@@ -244,13 +267,13 @@ function handleKeydown(e: KeyboardEvent) {
 		}
 
 		kbd {
-		    pointer-events: none;
-            font-size: 0.6rem;
-            color: #888;
-            padding: 1em;
-            grid-column: 2/2;
-            grid-row: 1/1;
-            transition: opacity 0.2s ease;
+			pointer-events: none;
+			font-size: 0.6rem;
+			color: #888;
+			padding: 1em;
+			grid-column: 2/2;
+			grid-row: 1/1;
+			transition: opacity 0.2s ease;
 		}
 
 		&:focus-within {

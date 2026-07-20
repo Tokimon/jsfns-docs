@@ -1,40 +1,41 @@
 <script lang="ts">
-import { url } from '$lib/url.js';
+	import { resolve } from '$app/paths';
 
-const { allVersions, version, packageName } = $props();
+	const { allVersions, version, packageName } = $props();
 </script>
 
-	{#if allVersions.length > 1}
-		<button class="current-version" popovertarget="version-list">v. {version}</button>
-		<ul class="version-list" id="version-list" popover>
-			{#each allVersions as v}
-				<li>
-					{#if v === version}
-						<div class="version selected">v. {v}</div>
-					{:else}
-						<a href={url(packageName, v)} class="version">v. {v}</a>
-					{/if}
-				</li>
-			{/each}
-		</ul>
-	{:else}
-		<div class="current-version">v. {version}</div>
-	{/if}
+{#if allVersions.length > 1}
+	<button class="current-version" popovertarget="version-list">v. {version}</button>
+	<ul class="version-list" id="version-list" popover>
+		{#each allVersions as v (v)}
+			<li>
+				{#if v === version}
+					<div class="version selected">v. {v}</div>
+				{:else}
+					<a
+						href={resolve('/[package]/[version]', { package: packageName, version: v })}
+						class="version">v. {v}</a
+					>
+				{/if}
+			</li>
+		{/each}
+	</ul>
+{:else}
+	<div class="current-version">v. {version}</div>
+{/if}
 
 <style>
-
 	.current-version,
 	.version {
-
-	cursor: pointer;
-	white-space: nowrap;
-	line-height: 2;
-	padding: 0 15px;
-	color: white;
+		cursor: pointer;
+		white-space: nowrap;
+		line-height: 2;
+		padding: 0 15px;
+		color: white;
 	}
 
 	.version {
-	display: block;
+		display: block;
 
 		&:hover {
 			background: #555;
@@ -48,10 +49,9 @@ const { allVersions, version, packageName } = $props();
 	}
 
 	.current-version {
-
-	background: none;
-	color: inherit;
-	font: inherit;
+		background: none;
+		color: inherit;
+		font: inherit;
 		padding: 5px 15px;
 		border-radius: 5px;
 		cursor: pointer;
@@ -60,8 +60,8 @@ const { allVersions, version, packageName } = $props();
 		transition: border-color 0.2s ease;
 
 		&:hover,
-	&:focus-visible {
-		    border-color: var(--focus-color);
+		&:focus-visible {
+			border-color: var(--focus-color);
 		}
 	}
 

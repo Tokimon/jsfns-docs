@@ -1,7 +1,7 @@
 <script lang="ts">
-import ModuleSignature from './module-signature.svelte';
+	import ModuleSignature from './module-signature.svelte';
 
-const { module } = $props();
+	const { module } = $props();
 </script>
 
 <section class="module" id={module.name}>
@@ -9,7 +9,7 @@ const { module } = $props();
 		<h1><a href="#{module.name}"><b>#</b> {module.name}</a></h1>
 
 		<div class="signatures">
-			{#each module.functions as func}
+			{#each module.functions as func (func.definition)}
 				<ModuleSignature {func} />
 			{/each}
 		</div>
@@ -60,7 +60,7 @@ const { module } = $props();
 		padding-block: var(--header-hight);
 
 		&:not(:last-child) {
-		    border-bottom: 2px dashed var(--border-color);
+			border-bottom: 2px dashed var(--border-color);
 		}
 
 		&:target {
