@@ -1,0 +1,59 @@
+{
+	"lsp": {
+		"oxfmt": {
+			"initialization_options": {
+				"settings": {
+					"fmt.configPath": null
+				}
+			}
+		}
+	},
+	"languages": {
+		"TypeScript": {
+			"format_on_save": "on",
+			"prettier": { "allowed": false },
+			"formatter": [{ "language_server": { "name": "oxfmt" } }],
+			"code_actions_on_format": {
+				"source.fixAll.biome": false,
+				"source.organizeImports.biome": false
+			},
+			"language_servers": ["!biome", "..."]
+		},
+		"JavaScript": {
+			"format_on_save": "on",
+			"prettier": { "allowed": false },
+			"formatter": [{ "language_server": { "name": "oxfmt" } }],
+			"code_actions_on_format": {
+				"source.fixAll.biome": false,
+				"source.organizeImports.biome": false
+			},
+			"language_servers": ["!biome", "..."]
+		},
+		"JSON": {
+			"format_on_save": "on",
+			"prettier": { "allowed": false },
+			"formatter": [{ "language_server": { "name": "oxfmt" } }],
+			"language_servers": ["!biome", "..."]
+		},
+		"CSS": {
+			"format_on_save": "on",
+			"prettier": { "allowed": false },
+			"formatter": [{ "language_server": { "name": "oxfmt" } }],
+			"code_actions_on_format": {
+				"source.fixAll.biome": false,
+				"source.organizeImports.biome": false
+			},
+			"language_servers": ["!biome", "..."]
+		},
+		"Svelte": {
+			"format_on_save": "on",
+			"prettier": { "allowed": false },
+			"formatter": [{ "language_server": { "name": "oxfmt" } }],
+			"code_actions_on_format": {
+				"source.fixAll.biome": false,
+				"source.organizeImports.biome": false
+			},
+			"language_servers": ["!biome", "..."]
+		}
+	}
+}
