@@ -25,6 +25,8 @@ export function getCustomTypesForModule(moduleName: string) {
 	return moduleTypes.join('\n\n');
 }
 
+export type CustomTypeEntry = { name: string; markdown: string; moduleName: string };
+
 export const getCustomTypes = () => {
 	const customTypes = Array.from(store.entries()).map(async ([name, { type, moduleName }]) => ({
 		name,
