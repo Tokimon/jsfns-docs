@@ -66,7 +66,7 @@
 		display: grid;
 		grid-template-columns: 1fr auto;
 		align-items: center;
-		border: 1px solid var(--border-color);
+		border: 1px solid var(--highlight);
 		border-radius: 0.5rem;
 		align-items: center;
 		min-width: 20rem;
@@ -91,7 +91,7 @@
 		kbd {
 			pointer-events: none;
 			font-size: 1rem;
-			color: var(--focus-color);
+			color: var(--highlight-contrast);
 			padding: 0 0.5em;
 			grid-column: 2/2;
 			grid-row: 1/1;
@@ -121,7 +121,7 @@
 		}
 
 		&:focus-within {
-			border-color: var(--hover-color);
+			border-color: var(--highlight-contrast);
 			kbd {
 				opacity: 0;
 			}

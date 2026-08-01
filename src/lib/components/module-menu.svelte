@@ -1,4 +1,6 @@
 <script lang="ts">
+	import CloseIcon from '$lib/components/icons/close-icon.svelte';
+
 	/* eslint-disable prefer-const -- navEl is reassigned via bind:this, so the destructure can't be const */
 	let {
 		modules,
@@ -124,11 +126,7 @@
 		/>
 		<kbd>[{hasFocus ? 'Home' : shortcutHint()}]</kbd>
 		<button class="clear-filter" onclick={clearFilter} aria-label="clear filter">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23777">
-				<path
-					d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-				/>
-			</svg>
+			<CloseIcon />
 		</button>
 	</label>
 

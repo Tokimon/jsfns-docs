@@ -111,18 +111,20 @@
 
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-	<article class="modules" onclick={handleTypeClick}>
+	<ul class="modules" onclick={handleTypeClick}>
 		{#each modules as module (module.name)}
-			<ModuleSection
-				{module}
-				href={resolve('/[package]/[version]/[module]', {
-					package: data.packageName,
-					version: data.version,
-					module: module.name,
-				})}
-			/>
+			<li>
+				<ModuleSection
+					{module}
+					href={resolve('/[package]/[version]/[module]', {
+						package: data.packageName,
+						version: data.version,
+						module: module.name,
+					})}
+				/>
+			</li>
 		{/each}
-	</article>
+	</ul>
 
 	{#each data.customTypes as { name, markdown } (name)}
 		<TypeTooltip {name} {markdown} />
@@ -136,6 +138,7 @@
 		display: grid;
 		grid-template-rows: auto 1fr;
 		grid-template-columns: 1fr;
+		height: 100dvh;
 	}
 
 	.header {
@@ -158,11 +161,19 @@
 	}
 
 	.modules {
+		margin: 0;
 		padding: 1.5rem;
 		overflow: auto;
 		position: relative;
+		list-style: none;
 		display: grid;
-		grid-template-columns: repeat(auto-fill, 20rem);
+		grid-template-columns: repeat(auto-fill, 30rem);
 		gap: 1rem;
+		justify-content: center;
+		align-content: start;
+
+		li {
+			display: flex;
+		}
 	}
 </style>

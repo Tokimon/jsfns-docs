@@ -1,21 +1,20 @@
 :root {
-	--theme-color: oklch(0.65 0.09 180);
-	--base-ambiance-color: oklch(0.1 0.04 230);
+	--dark-1: oklch(17% 7% 255);
+	--dark-2: oklch(26% 10% 246);
+	--highlight: oklch(45% 30% 156);
+	--highlight-dark: oklch(30% 30% 156);
+	--highlight-contrast: oklch(75% 30% 156);
 
-	--body-bg-color: var(--base-ambiance-color);
-	--module-bg-color: oklch(from var(--base-ambiance-color) 0.23 c h);
-	--overlay-bg: oklch(from var(--base-ambiance-color) 0.5 0.06 h);
-	--header-bg-color: oklch(from var(--base-ambiance-color) 0.29 c h);
-	--card-bg-color: oklch(from var(--base-ambiance-color) 0.32 0.035 h);
+	--gray: oklch(30% 0 0);
+	--light-gray: oklch(55% 0 0);
+	--white: oklch(88% 0 0);
 
-	--foldable-color: #cc7000;
-	--property-color: hotpink;
-	--link-color: oklch(from var(--theme-color) calc(l - 0.2) c h);
-	--focus-color: var(--theme-color);
-	--hover-color: oklch(from var(--theme-color) calc(l + 0.4) c h);
-	--border-color: oklch(from var(--theme-color) 0.5 0.06 h);
-	--text-color: whitesmoke;
-	--text-neutral-color: oklch(0.6 0 0);
+	--header-bg-color: var(--dark-2);
+	--body-bg-color: var(--dark-1);
+	--card-bg-color: var(--dark-2);
+
+	--text-color: var(--white);
+	--text-neutral-color: var(--light-gray);
 
 	font-family:
 		Arial,
@@ -29,7 +28,7 @@
 		'Open Sans',
 		'Helvetica Neue',
 		sans-serif;
-	font-size: 14px;
+	font-size: 0.9rem;
 }
 
 body {
@@ -63,6 +62,7 @@ a {
 	scrollbar-width: thin;
 	scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 	scroll-behavior: smooth;
+	box-sizing: border-box;
 }
 
 *::-webkit-scrollbar {
