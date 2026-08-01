@@ -1,12 +1,21 @@
 :root {
+	--theme-color: oklch(0.65 0.09 180);
+	--base-ambiance-color: oklch(0.1 0.04 230);
+
+	--body-bg-color: var(--base-ambiance-color);
+	--module-bg-color: oklch(from var(--base-ambiance-color) 0.23 c h);
+	--overlay-bg: oklch(from var(--base-ambiance-color) 0.5 0.06 h);
+	--header-bg-color: oklch(from var(--base-ambiance-color) 0.29 c h);
+	--card-bg-color: oklch(from var(--base-ambiance-color) 0.32 0.035 h);
+
 	--foldable-color: #cc7000;
 	--property-color: hotpink;
-	--link-color: #79b3ff;
-	--focus-color: #58b29a;
-	--hover-color: darkolivegreen;
-	--border-color: #444;
-	--module-bg-color: #192229;
-	--header-color: #212d36;
+	--link-color: oklch(from var(--theme-color) calc(l - 0.2) c h);
+	--focus-color: var(--theme-color);
+	--hover-color: oklch(from var(--theme-color) calc(l + 0.4) c h);
+	--border-color: oklch(from var(--theme-color) 0.5 0.06 h);
+	--text-color: whitesmoke;
+	--text-neutral-color: oklch(0.6 0 0);
 
 	font-family:
 		Arial,
@@ -26,8 +35,8 @@
 body {
 	min-height: 100vh;
 	margin: 0;
-	background: #11181d;
-	color: whitesmoke;
+	background: var(--body-bg-color);
+	color: var(--text-color);
 }
 
 pre,
