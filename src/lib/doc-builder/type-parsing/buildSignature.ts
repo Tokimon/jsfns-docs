@@ -1,16 +1,31 @@
 import type { JSONOutput } from 'typedoc';
-import { buildParam } from './buildProperty.js';
-import { buildSummary } from './buildSummary.js';
+import { buildParamData, type ParamData } from './buildProperty.js';
 import { TSCodeMarkdown } from './markdown.js';
 import { type TypeStringOptions, typeString } from './typeString.js';
+
+export type SignatureData = {
+	definition: string; // markdown html
+	params: ParamData[];
+	returnType: string;
+	typeParameters?: string;
+};
+
+function formatParam({ name, type, optional, defaultValue }: ParamData) {
+	const defVal = defaultValue ? ` = ${defaultValue}` : '';
+
+	return name === '__namedParameters'
+		? `${type}${defVal}`
+		: `${name}${optional ? '?' : ''}: ${type}${defVal}`;
+}
 
 export const buildSignature = async (
 	name: string,
 	signature: JSONOutput.SignatureReflection,
 	options: TypeStringOptions,
-) => {
+): Promise<SignatureData> => {
 	const { type, parameters, typeParameters } = signature;
-	const params = (parameters?.map((param) => buildParam(param, options)) ?? []).join(', ');
+	const paramsData = parameters?.map((param) => buildParamData(param, options)) ?? [];
+	const params = paramsData.map(formatParam).join(', ');
 
 	let typeDef = typeParameters
 		?.map((t) => {
@@ -24,28 +39,19 @@ export const buildSignature = async (
 
 	if (typeDef) typeDef = `<${typeDef}>`;
 
-	const paramComments = (parameters || []).reduce<Record<string, string>>(
-		(rec, { name, comment }) => {
-			const desc = buildSummary(comment?.summary);
-			if (desc) rec[name] = desc;
-			return rec;
-		},
-		{},
-	);
+	const returnType = type ? typeString(type, options) : 'void';
 
-	const str = type ? typeString(type, options) : 'void';
-
-	let md = await TSCodeMarkdown(`${name}${typeDef || ''}(${params}): ${str}`);
+	let md = await TSCodeMarkdown(`${name}${typeDef || ''}(${params}): ${returnType}`);
 
 	md = md.replaceAll(
 		/(class="hljs-attr")([^>]*>)([^<]*)(<)/g,
-		(_, _class, restOfTag, name, endTag) => {
-			let desc = paramComments[name as string] ?? '';
-			if (desc) desc = ` title="${desc}"`;
+		(_, _class, restOfTag, paramName, endTag) => {
+			const desc = paramsData.find((p) => p.name === paramName)?.description ?? '';
+			const title = desc ? ` title="${desc}"` : '';
 
-			return _class + desc + restOfTag + name + endTag;
+			return _class + title + restOfTag + paramName + endTag;
 		},
 	);
 
-	return md;
+	return { definition: md, params: paramsData, returnType, typeParameters: typeDef };
 };

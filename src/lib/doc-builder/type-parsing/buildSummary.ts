@@ -6,7 +6,7 @@ export const buildSummary = (summary: JSONOutput.CommentDisplayPart[] = []) =>
 			if (sum.kind !== 'inline-tag') return text;
 			if (sum.tag !== '@link') return text;
 
-			return `[${text}](#${text})`;
+			return `[${text}](./${text})`;
 		})
 		.join('')
 		.trim();

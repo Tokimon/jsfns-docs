@@ -40,3 +40,8 @@ const opts = { mangle: false, headerIds: false, gfm: true, breaks: true };
 export const markdown = async (md: string) => md && marked(md, opts);
 
 export const TSCodeMarkdown = async (code: string) => code && markdown(`\`\`\`ts\n${code}\n\`\`\``);
+
+export const firstElement = (html: string) => {
+	const match = /^\s*<([a-z][a-z0-9]*)\b[^>]*>[\s\S]*?<\/\1>/i.exec(html);
+	return match ? match[0] : html.trim();
+};

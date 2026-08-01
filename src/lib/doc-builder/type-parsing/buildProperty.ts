@@ -1,6 +1,15 @@
 import type { JSONOutput } from 'typedoc';
 import { buildComment } from './buildComment.js';
+import { buildSummary } from './buildSummary.js';
 import { type TypeStringOptions, typeString } from './typeString.js';
+
+export type ParamData = {
+	name: string;
+	type: string;
+	optional: boolean;
+	defaultValue?: string;
+	description?: string;
+};
 
 type PropertyLikeProp = {
 	name: string;
@@ -42,4 +51,20 @@ export function buildParam(prop: JSONOutput.ParameterReflection, options: TypeSt
 		options.commentExtractor.push(...buildComment(prop.comment));
 
 	return buildPropertyLike(prop, options);
+}
+
+export function buildParamData(
+	prop: JSONOutput.ParameterReflection,
+	options: TypeStringOptions,
+): ParamData {
+	const { name, flags, type, defaultValue, comment } = prop;
+	const description = comment ? buildSummary(comment.summary) : '';
+
+	return {
+		name,
+		type: type ? typeString(type, options) : 'unknown',
+		optional: !!flags.isOptional,
+		...(defaultValue ? { defaultValue } : {}),
+		...(description ? { description } : {}),
+	};
 }

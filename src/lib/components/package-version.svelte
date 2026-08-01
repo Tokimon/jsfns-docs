@@ -38,12 +38,12 @@
 		display: block;
 
 		&:hover {
-			background: #555;
+			background: var(--gray);
 		}
 
 		&.selected {
-			background: var(--focus-color);
-			color: black;
+			background: var(--highlight-contrast);
+			color: var(--highlight-dark);
 			cursor: default;
 		}
 	}
@@ -61,7 +61,7 @@
 
 		&:hover,
 		&:focus-visible {
-			border-color: var(--focus-color);
+			border-color: var(--highlight-contrast);
 		}
 	}
 
@@ -69,8 +69,8 @@
 		list-style: none;
 		margin: 5px 0 0 0;
 		padding: 0;
-		background: var(--module-bg-color);
-		border: 1px solid var(--border-color);
+		background: var(--dark-1);
+		border: 0;
 		border-radius: 4px;
 		overflow: hidden;
 		position-anchor: --version-trigger;
